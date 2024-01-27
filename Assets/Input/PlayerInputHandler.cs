@@ -10,6 +10,7 @@ public class PlayerInputHandler : MonoBehaviour
     private PlayerController _playerController;
     private Vector3 startPos = new Vector3(0, 0, 0);
 
+
     private void Awake()
     {
         if (playerPrefab != null)
@@ -24,5 +25,13 @@ public class PlayerInputHandler : MonoBehaviour
     {
         _playerController.OnMove(context);
     }
+
+    public void OnClimb(InputAction.CallbackContext context)
+    {
+        _playerController.Climb(context);
+
+    }
+    
+    
     
 }

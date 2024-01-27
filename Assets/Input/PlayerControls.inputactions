@@ -9,10 +9,10 @@
                     "name": "Movement",
                     "type": "PassThrough",
                     "id": "5a9ddbfe-0fcb-4e4e-8eb8-87b63f341942",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Analog",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Join",
@@ -21,6 +21,15 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Climb",
+                    "type": "PassThrough",
+                    "id": "663bb935-2e7a-494e-9cb0-48c8f5c8f5ca",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=1)",
                     "initialStateCheck": false
                 }
             ],
@@ -110,6 +119,28 @@
                     "processors": "",
                     "groups": "KB+M",
                     "action": "Join",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3bc5cf37-7d1c-4284-97ec-b176854a3fa4",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KB+M",
+                    "action": "Climb",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "076358c4-4d6a-40ff-ad0d-688e89f4dd02",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GamePad",
+                    "action": "Climb",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
