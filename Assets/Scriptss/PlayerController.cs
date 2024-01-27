@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    private CharacterController controller;
+    private Rigidbody2D _rigidbody2D;
+    
     private Vector3 playerVelocity;
     private bool groundedPlayer;
     [SerializeField]private float playerSpeed = 2.0f;
@@ -14,42 +15,28 @@ public class PlayerController : MonoBehaviour
     private float gravityValue = -9.81f;
     public Camera camera;
 
-    private Vector3 move;
+    private Vector2 move;
 
     private void Awake()
     {
-        controller = GetComponent<CharacterController>();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        groundedPlayer = controller.isGrounded;
-        if (groundedPlayer && playerVelocity.y < 0)
+
+        if (move != Vector2.zero)
         {
-            playerVelocity.y = 0f;
+            gameObject.transform.right = Vector2.Lerp(transform.right, move, 0.1f);
         }
 
-        
-        controller.Move(move * Time.deltaTime * playerSpeed);
-
-        if (move != Vector3.zero)
-        {
-            gameObject.transform.forward = move;
-        }
-
-        /*// Changes the height position of the player..
-        if (Input.GetButtonDown("Jump") && groundedPlayer)
-        {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-        }*/
-
-        playerVelocity.y += gravityValue * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
+        _rigidbody2D.velocity = move * playerSpeed;
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
         Vector2 movement = context.ReadValue<Vector2>();
-        move = new Vector3(movement.x, 0, movement.y);
+        movement.Normalize();
+        move = new Vector2(movement.x, movement.y);
     }
 }
