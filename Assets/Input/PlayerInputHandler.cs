@@ -23,13 +23,18 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        
         _playerController.OnMove(context);
+
+            
     }
 
     public void OnClimb(InputAction.CallbackContext context)
     {
-        _playerController.Climb(context);
-
+        if (context.started)
+        {
+            _playerController.Climb(context);
+        }
     }
     
     

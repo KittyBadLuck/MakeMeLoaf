@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [Header("Settings")]
     [SerializeField]private float playerSpeed = 2.0f;
     public float yClimbOffset = 0.5f;
+    public float fallDistance = 1f;
     public float climbMoveLimit = 0.5f;
     
     [Header("Ref")]
@@ -17,9 +18,12 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     public SpriteRenderer renderer;
     private Vector2 move;
+    
     public bool isNearPlayer;
     public List<GameObject> climbablePlayer;
     public bool isLifting;
+    private bool isLifted;
+    private GameObject playerClimbed;
     
 
     private void Awake()
@@ -35,7 +39,39 @@ public class PlayerController : MonoBehaviour
             gameObject.transform.right = Vector2.Lerp(transform.right, move, 0.1f);
         }
 
-        _rigidbody2D.velocity = move * playerSpeed;
+        if (isLifted)
+        {
+            
+            Vector3 diff = new Vector2(playerClimbed.transform.position.x, playerClimbed.transform.position.y) -
+                           new Vector2(transform.position.x, transform.position.y - yClimbOffset);
+            if (diff.magnitude > climbMoveLimit)
+            {
+                Fall();
+            }
+        }
+
+        if (isLifted || isLifting)
+        {
+            _rigidbody2D.velocity = move * (playerSpeed/2);
+        }
+        else
+        {
+            _rigidbody2D.velocity = move * playerSpeed;
+        }
+        
+    }
+
+    private void Fall()
+    {
+        renderer.sortingOrder += 0;
+        isLifted = false;
+        playerClimbed.GetComponent<PlayerController>().isLifting = false;
+        transform.position = playerClimbed.transform.position + new Vector3(move.x, move.y , 0)* fallDistance;
+
+        if (isLifting)
+        {
+            print("Make Lifted player fall too");
+        }
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -47,20 +83,30 @@ public class PlayerController : MonoBehaviour
 
     public void Climb(InputAction.CallbackContext context)
     {
-
-        if (isNearPlayer && climbablePlayer.Count > 0)
+        if (isLifted)
         {
-            GameObject closest = GetClosestPlayer(climbablePlayer);
-
-            if (closest != null)
+            Fall();
+        }
+        else
+        {
+            if ( !isLifting && isNearPlayer && climbablePlayer.Count > 0)
             {
-                closest.GetComponent<PlayerController>().isLifting = true;
-                renderer.sortingOrder += 1;
-                Transform t = this.transform;
-                Transform climbT = closest.transform;
-                transform.position = climbT.position + new Vector3(0, yClimbOffset, 0);
+                GameObject closest = GetClosestPlayer(climbablePlayer);
+
+                if (closest)
+                {
+                    closest.GetComponent<PlayerController>().isLifting = true;
+                    renderer.sortingOrder += closest.GetComponent<PlayerController>().renderer.sortingOrder + 1;
+                    Transform t = this.transform;
+                    Transform climbT = closest.transform;
+                    transform.position = climbT.position + new Vector3(0, yClimbOffset, 0);
+                    playerClimbed = closest;
+                    isLifted = true;
+                }
             }
         }
+
+       
     }
     
     GameObject GetClosestPlayer(List<GameObject> players)
