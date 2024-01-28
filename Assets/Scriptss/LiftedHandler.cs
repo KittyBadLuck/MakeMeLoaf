@@ -9,6 +9,7 @@ public class LiftedHandler : MonoBehaviour
     public bool isReadyToBake;
     public bool isBaked;
     public PlayerController liftingPlayer;
+    public SpriteRenderer doughSprite;
 
     // Update is called once per frame
     void Update()

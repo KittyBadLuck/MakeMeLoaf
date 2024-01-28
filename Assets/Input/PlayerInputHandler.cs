@@ -65,6 +65,16 @@ public class PlayerInputHandler : MonoBehaviour
                             miniGame1.canUse = true;
                         }
                     }
+                    else if (_playerController.isNearMini3)
+                    {
+                        if (miniGame3.bakedDough != null)
+                        {
+                            _playerController.Lift(miniGame3.bakedDough);
+                            miniGame3.bakedDough.SetActive(true);
+                            miniGame3.GetDough();
+
+                        }
+                    }
                     else
                     {
                         _playerController.Climb();
@@ -117,18 +127,22 @@ public class PlayerInputHandler : MonoBehaviour
 
         if (_playerController.isNearMini3)
         {
-            if (_playerController.isLifted && _playerController.isLifting)
+            if (miniGame3.canUse)
             {
-                if (_playerController.liftedObject.GetComponent<LiftedHandler>().isReadyToBake)
+                if (_playerController.isLifted && _playerController.isLifting)
                 {
+                    if (_playerController.liftedObject.GetComponent<LiftedHandler>().isReadyToBake && (_playerController.liftedObject.GetComponent<LiftedHandler>().isBaked == false))
+                    {
                     
-                    miniGame3.Bake();
-                    GameObject.Destroy(_playerController.liftedObject);
-                    _playerController.liftedObject = null;
-                    _playerController.isLifting = false;
-                }
+                        miniGame3.Bake();
+                        GameObject.Destroy(_playerController.liftedObject);
+                        _playerController.liftedObject = null;
+                        _playerController.isLifting = false;
+                    }
                 
+                }
             }
+            
                 
         }
         
