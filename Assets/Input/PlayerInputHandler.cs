@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class PlayerInputHandler : MonoBehaviour
 {
     public GameObject playerPrefab;
-    private PlayerController _playerController;
+    public PlayerController _playerController;
     
     [Header("Minigame")]
     public MiniGame1 miniGame1;

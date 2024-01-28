@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     private int playerCount = 0;
     public int playerMax = 4;
     private PlayerInputManager playerInputManager;
+    private bool playersHidden;
 
     [Header("JoinScreen")] 
     public Canvas joinScreen;
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
     public List<Sprite> playerSprites;
     private float targetTime = 2;
     private bool playerSelected;
+    private PlayerController pController;
 
     [Header("Minigame")]
     public Canvas minigame;
@@ -38,7 +40,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         playerInputManager = FindObjectOfType<PlayerInputManager>();
-        
+        pController = players[0].gameObject.GetComponent<PlayerInputHandler>()._playerController;
     }
 
     private void Update()
@@ -51,6 +53,25 @@ public class GameManager : MonoBehaviour
             {
                 timerEnded();
             }
+        }
+        
+        if (pController.hasHat && pController.isLifted)
+        {
+            if(pController.playerClimbed.GetComponent<PlayerController>().hasCoat)
+            {
+                playersHidden = true;
+            }
+        }
+        else if (pController.hasCoat && pController.isLifting)
+        {
+            if(pController.liftedObject.CompareTag("Player") && pController.liftedObject.GetComponent<PlayerController>().hasCoat)
+            {
+                playersHidden = true;
+            }
+        }
+        else
+        {
+            playersHidden = false;
         }
     }
 

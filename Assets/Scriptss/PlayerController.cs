@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
     public float fallDistance = 1f;
     public float climbMoveLimit = 0.5f;
 
+    public bool hasHat;
+    public bool hasCoat;
+
     [Header("Minigame")] 
     public bool isNearCounter;
 
@@ -33,7 +36,7 @@ public class PlayerController : MonoBehaviour
     public bool isLifting;
     public GameObject liftedObject;
     public bool isLifted;
-    private GameObject playerClimbed;
+    public GameObject playerClimbed;
     
 
     private void Awake()
