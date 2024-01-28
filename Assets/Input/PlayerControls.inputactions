@@ -33,13 +33,13 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "LeftKnead",
-                    "type": "Value",
-                    "id": "db68cb5c-a165-4602-a75e-9a1bcde14ad3",
+                    "name": "Test",
+                    "type": "PassThrough",
+                    "id": "6b4432d3-99e7-4120-aedc-1815fbbb3ff6",
                     "expectedControlType": "",
-                    "initialStateCheck": true
-                    "interactions": "",
                     "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -155,12 +155,23 @@
                 },
                 {
                     "name": "",
-                    "id": "e994a06c-77d7-4077-a288-7170e1791c55",
+                    "id": "576f7b68-f179-4d41-b230-0e37ffae4cab",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KB+M",
+                    "action": "Test",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0bd293ea-effe-49c7-9b0d-fa8e28a4cbb5",
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "GamePad",
-                    "action": "LeftKnead",
+                    "action": "Test",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

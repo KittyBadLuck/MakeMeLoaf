@@ -17,7 +17,8 @@ public class PlayerController : MonoBehaviour
     public Camera camera;
     private Rigidbody2D _rigidbody2D;
     public SpriteRenderer renderer;
-    private Vector2 move;
+    public Vector2 move;
+    private Animator _animator;
     
     public bool isNearPlayer;
     public List<GameObject> climbablePlayer;
@@ -29,35 +30,68 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
     void FixedUpdate()
     {
-
-        if (move != Vector2.zero)
-        {
-            gameObject.transform.right = Vector2.Lerp(transform.right, move, 0.1f);
-        }
-
+        
         if (isLifted)
         {
-            
-            Vector3 diff = new Vector2(playerClimbed.transform.position.x, playerClimbed.transform.position.y) -
-                           new Vector2(transform.position.x, transform.position.y - yClimbOffset);
-            if (diff.magnitude > climbMoveLimit)
-            {
-                Fall();
-            }
+            transform.position = playerClimbed.transform.position + new Vector3(0,yClimbOffset,0 );
         }
 
-        if (isLifted || isLifting)
+        if (isLifting)
         {
             _rigidbody2D.velocity = move * (playerSpeed/2);
         }
-        else
+        else if(!isLifted)
         {
             _rigidbody2D.velocity = move * playerSpeed;
         }
+
+        if (move != Vector2.zero)
+        {
+            if (!isLifted)
+            {
+                if (move.y >= 0)
+                {
+                    if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("CatWalkSide"))
+                    {
+                        _animator.Play("CatWalkSide");
+                    }
+                }
+                else
+                { 
+                    if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("CatWalkDown"))
+                    {
+                        _animator.Play("CatWalkDown");
+                    }
+                
+                }
+            }
+            
+
+            if (move.x >= 0)
+            {
+                renderer.flipX = true;
+            }
+            else
+            {
+                renderer.flipX = false;
+            }
+            
+        }
+        else
+        {
+            if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("CatIdle"))
+            {
+                _animator.Play("CatIdle");
+            }
+           
+        }
+
+
         
     }
 
