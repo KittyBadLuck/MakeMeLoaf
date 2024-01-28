@@ -78,6 +78,12 @@ public class PlayerInputHandler : MonoBehaviour
             }
             
         }
+
+        if(context.performed)
+        {
+            miniGame2.RetractPeet1();
+        }
+
     }
 
     public void LeftKnead(InputAction.CallbackContext context)
@@ -113,8 +119,28 @@ public class PlayerInputHandler : MonoBehaviour
             playing1 = true;
         }
         
+        if(context.performed)
+        {
+            miniGame2.Smash();
+        }
+    }
 
-        miniGame2.Smash();
+    
+
+    public void North(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            miniGame2.RetractPeet3();
+        }
+    }
+
+    public void East(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            miniGame2.RetractPeet2();
+        }
     }
     
     

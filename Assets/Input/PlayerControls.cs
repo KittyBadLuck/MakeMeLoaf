@@ -80,6 +80,24 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""North"",
+                    ""type"": ""Button"",
+                    ""id"": ""2ee25554-d7cc-4891-80e9-792bba5fab6a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""East"",
+                    ""type"": ""Button"",
+                    ""id"": ""2c985ca1-322e-4342-8060-53af40c58c36"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -258,6 +276,50 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Action"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2eb55406-7af4-4e74-bf7a-e884c3450612"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""North"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8114b5a5-44ea-47cd-8bdc-563f7a073299"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KB+M"",
+                    ""action"": ""North"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b7098d96-4925-4eae-b5a4-38a4f1d4dac3"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""East"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7c32cd94-e11b-433f-bf77-1805be779250"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KB+M"",
+                    ""action"": ""East"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -306,6 +368,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_LeftKnead = m_Player.FindAction("LeftKnead", throwIfNotFound: true);
         m_Player_RightKnead = m_Player.FindAction("RightKnead", throwIfNotFound: true);
         m_Player_Action = m_Player.FindAction("Action", throwIfNotFound: true);
+        m_Player_North = m_Player.FindAction("North", throwIfNotFound: true);
+        m_Player_East = m_Player.FindAction("East", throwIfNotFound: true);
         // MiniGame1
         m_MiniGame1 = asset.FindActionMap("MiniGame1", throwIfNotFound: true);
     }
@@ -373,6 +437,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_LeftKnead;
     private readonly InputAction m_Player_RightKnead;
     private readonly InputAction m_Player_Action;
+    private readonly InputAction m_Player_North;
+    private readonly InputAction m_Player_East;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -383,6 +449,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @LeftKnead => m_Wrapper.m_Player_LeftKnead;
         public InputAction @RightKnead => m_Wrapper.m_Player_RightKnead;
         public InputAction @Action => m_Wrapper.m_Player_Action;
+        public InputAction @North => m_Wrapper.m_Player_North;
+        public InputAction @East => m_Wrapper.m_Player_East;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -410,6 +478,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Action.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAction;
                 @Action.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAction;
                 @Action.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAction;
+                @North.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNorth;
+                @North.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNorth;
+                @North.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNorth;
+                @East.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEast;
+                @East.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEast;
+                @East.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEast;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -432,6 +506,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Action.started += instance.OnAction;
                 @Action.performed += instance.OnAction;
                 @Action.canceled += instance.OnAction;
+                @North.started += instance.OnNorth;
+                @North.performed += instance.OnNorth;
+                @North.canceled += instance.OnNorth;
+                @East.started += instance.OnEast;
+                @East.performed += instance.OnEast;
+                @East.canceled += instance.OnEast;
             }
         }
     }
@@ -487,6 +567,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnLeftKnead(InputAction.CallbackContext context);
         void OnRightKnead(InputAction.CallbackContext context);
         void OnAction(InputAction.CallbackContext context);
+        void OnNorth(InputAction.CallbackContext context);
+        void OnEast(InputAction.CallbackContext context);
     }
     public interface IMiniGame1Actions
     {
