@@ -16,6 +16,9 @@ public class PlayerInputHandler : MonoBehaviour
     public Slider slider;
     public Slider slider2;
     public bool playing1;
+    public MiniGame2 miniGame2;
+    public Canvas Mini2Prefab;
+    public bool playing2;
     
     [Header("Comptoire")]
     public Canvas comptoirCanvas;
@@ -32,6 +35,7 @@ public class PlayerInputHandler : MonoBehaviour
         slider = Mini1Prefab.GetComponentsInChildren<Slider>()[0];
         slider2 = Mini1Prefab.GetComponentsInChildren<Slider>()[1];
         miniGame1 = Mini1Prefab.gameObject.GetComponent<MiniGame1>();
+        miniGame2 = Mini2Prefab.gameObject.GetComponent<MiniGame2>();
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -84,6 +88,8 @@ public class PlayerInputHandler : MonoBehaviour
             miniGame1.player = this;
             playing1 = true;
         }
+
+        miniGame2.Smash();
     }
     
     

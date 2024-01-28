@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     [Header("Minigame")]
     public Canvas minigame;
     public Canvas comptoir; 
+    public Canvas minigame2;
 
     private void Awake()
     {
@@ -41,6 +42,7 @@ public class GameManager : MonoBehaviour
         //add the layer
         playerParent.GetComponentInChildren<Camera>().cullingMask |= 1 << layerToAdd;
         playerParent.GetComponent<PlayerInputHandler>().Mini1Prefab = minigame;
+        playerParent.GetComponent<PlayerInputHandler>().Mini2Prefab = minigame2;
         playerParent.GetComponent<PlayerInputHandler>().comptoirCanvas = comptoir;
         playerParent.GetComponentInChildren<Animator>().runtimeAnimatorController = playerAnimators[players.Count - 1];
 
