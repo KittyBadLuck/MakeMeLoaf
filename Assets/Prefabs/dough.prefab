@@ -211,6 +211,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLifted: 0
   isKneadedDough: 1
-  isReadyToBake: 0
+  isReadyToBake: 1
   isBaked: 0
   liftingPlayer: {fileID: 0}

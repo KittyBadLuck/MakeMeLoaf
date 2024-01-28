@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -51,7 +52,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (!playing1)
         {
-            if (context.started)
+            if (context.performed)
             {
                 if (!_playerController.isLifting)
                 {
@@ -66,7 +67,6 @@ public class PlayerInputHandler : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("tryClimb");
                         _playerController.Climb();
                     }
                 }
@@ -111,12 +111,25 @@ public class PlayerInputHandler : MonoBehaviour
             Mini1Prefab.worldCamera = this.gameObject.GetComponent<PlayerInput>().camera;
             miniGame1.player = this;
             miniGame1.canUse = false;
+            _playerController.move = new Vector2(0, 0);
             playing1 = true;
         }
 
         if (_playerController.isNearMini3)
         {
-            miniGame3.Bake();
+            if (_playerController.isLifted && _playerController.isLifting)
+            {
+                if (_playerController.liftedObject.GetComponent<LiftedHandler>().isReadyToBake)
+                {
+                    
+                    miniGame3.Bake();
+                    GameObject.Destroy(_playerController.liftedObject);
+                    _playerController.liftedObject = null;
+                    _playerController.isLifting = false;
+                }
+                
+            }
+                
         }
         
 

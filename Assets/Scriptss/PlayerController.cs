@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     public List<GameObject> climbablePlayer;
     public bool isLifting;
     public GameObject liftedObject;
-    private bool isLifted;
+    public bool isLifted;
     private GameObject playerClimbed;
     
 
@@ -207,13 +207,11 @@ public class PlayerController : MonoBehaviour
         {
             if (isNearPlayer && climbablePlayer.Count > 0)
             {
-                Debug.Log("TryClimb");
                 GameObject closest = GetClosestPlayer(climbablePlayer);
                 PlayerController closestController = closest.GetComponent<PlayerController>();
 
                 if (closest && closestController.isLifting)
                 {
-                    Debug.Log("TryLiftPlayer " + !closestController.liftedObject.CompareTag("Player"));
                     if (!closestController.liftedObject.CompareTag("Player"))
                     {
                         isLifting = true;
