@@ -12,9 +12,10 @@ public class PlayerInputHandler : MonoBehaviour
     
     [Header("Minigame")]
     public MiniGame1 miniGame1;
-    public Canvas sliderPref;
+    public Canvas Mini1Prefab;
     public Slider slider;
     public Slider slider2;
+    public bool playing1;
     
     [Header("Comptoire")]
     public Canvas comptoirCanvas;
@@ -28,39 +29,61 @@ public class PlayerInputHandler : MonoBehaviour
             transform.parent = _playerController.transform;
         }
 
-        slider = sliderPref.GetComponentsInChildren<Slider>()[0];
-        slider2 = sliderPref.GetComponentsInChildren<Slider>()[1];
+        slider = Mini1Prefab.GetComponentsInChildren<Slider>()[0];
+        slider2 = Mini1Prefab.GetComponentsInChildren<Slider>()[1];
+        miniGame1 = Mini1Prefab.gameObject.GetComponent<MiniGame1>();
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        _playerController.OnMove(context);
-
+        if (!playing1)
+        {
+            _playerController.OnMove(context);
+        }
     }
 
     public void OnClimb(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (!playing1)
         {
-            _playerController.Climb(context);
+            if (context.started)
+            {
+                _playerController.Climb(context);
+            }
         }
     }
 
     public void LeftKnead(InputAction.CallbackContext context)
     {
-
-        slider.value = context.ReadValue<float>();
+        if (playing1)
+        {
+            slider.value = context.ReadValue<float>();
+        }
+        
     }
 
     public void RightKnead(InputAction.CallbackContext context)
     {
-        slider2.value = context.ReadValue<float>();
+        if (playing1)
+        {
+            slider2.value = context.ReadValue<float>();
+        }
     }
 
     public void Interaction(InputAction.CallbackContext context)
     {
-        comptoirCanvas.gameObject.SetActive(true);
-        
+        if (_playerController.isNearCounter)
+        {
+            comptoirCanvas.gameObject.SetActive(true);
+        }
+
+        if (_playerController.isNearMini1 && miniGame1.canUse)
+        {
+            Mini1Prefab.gameObject.SetActive(true);
+            Mini1Prefab.worldCamera = this.gameObject.GetComponent<PlayerInput>().camera;
+            miniGame1.player = this;
+            playing1 = true;
+        }
     }
     
     

@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
         playerParent.GetComponentInChildren<CinemachineVirtualCamera>().gameObject.layer = layerToAdd;
         //add the layer
         playerParent.GetComponentInChildren<Camera>().cullingMask |= 1 << layerToAdd;
-        playerParent.GetComponent<PlayerInputHandler>().sliderPref = minigame;
+        playerParent.GetComponent<PlayerInputHandler>().Mini1Prefab = minigame;
         playerParent.GetComponent<PlayerInputHandler>().comptoirCanvas = comptoir;
         playerParent.GetComponentInChildren<Animator>().runtimeAnimatorController = playerAnimators[players.Count - 1];
 

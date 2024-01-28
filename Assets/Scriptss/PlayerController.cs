@@ -12,6 +12,11 @@ public class PlayerController : MonoBehaviour
     public float yClimbOffset = 0.5f;
     public float fallDistance = 1f;
     public float climbMoveLimit = 0.5f;
+
+    [Header("Minigame")] 
+    public bool isNearCounter;
+
+    public bool isNearMini1;
     
     [Header("Ref")]
     public Camera camera;
@@ -70,7 +75,6 @@ public class PlayerController : MonoBehaviour
                 
                 }
             }
-            
 
             if (move.x >= 0)
             {
@@ -91,8 +95,6 @@ public class PlayerController : MonoBehaviour
            
         }
 
-
-        
     }
 
     private void Fall()
@@ -172,6 +174,11 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+
+        if (other.CompareTag("MiniGame1"))
+        {
+            isNearMini1 = true;
+        }
     }
     
 
@@ -184,6 +191,10 @@ public class PlayerController : MonoBehaviour
             {
                 isNearPlayer = false;
             }
+        }
+        if (other.CompareTag("MiniGame1"))
+        {
+            isNearMini1 = false;
         }
     }
 }

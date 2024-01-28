@@ -19,6 +19,10 @@ public class MiniGame1 : MonoBehaviour
     public Slider slider;
     public Slider slider2;
 
+    private float targetTime = 2f;
+    public PlayerInputHandler player;
+    public bool canUse = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,47 +34,71 @@ public class MiniGame1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         if(slider.value > 0.9f && isTouching == false)
-         {
-             isTouching = true;
-             kneadNumber += 1;
-             Debug.Log(kneadNumber);
-         }
+        Kneading();
 
-         if(slider.value < 0.5f)
-         {
-             isTouching = false;
-         }
+        if (isGameDone)
+        {
+            targetTime -= Time.deltaTime;
 
-         if(slider2.value > 0.9f && isTouching2 == false)
-         {
-             isTouching2 = true;
-             kneadNumber += 1;
-             Debug.Log(kneadNumber);
-         }
+            if (targetTime <= 0.0f)
+            {
+                timerEnded();
+            }
+        }
 
-         if(slider2.value < 0.5f)
-         {
-             isTouching2 = false;
-         }
+    }
 
-         if(slider.value > 0.5f || slider2.value > 0.5f)
-         {
-             doughShape.localScale = startingScale + (new Vector3(slider.value/4, -slider.value/4, 0) + new Vector3(-slider2.value/5, slider2.value/8, 0));
-         }
+    void timerEnded()
+    {
+        player.playing1 = false;
+        SpawnDough();
+        this.gameObject.SetActive(false);
+    }
+
+    void SpawnDough()
+    {
+        canUse = false;
+    }
+
+    void Kneading()
+    {
+        if(slider.value > 0.9f && isTouching == false)
+        {
+            isTouching = true;
+            kneadNumber += 1;
+        }
+
+        if(slider.value < 0.5f)
+        {
+            isTouching = false;
+        }
+
+        if(slider2.value > 0.9f && isTouching2 == false)
+        {
+            isTouching2 = true;
+            kneadNumber += 1;
+        }
+
+        if(slider2.value < 0.5f)
+        {
+            isTouching2 = false;
+        }
+
+        if(slider.value > 0.5f || slider2.value > 0.5f)
+        {
+            doughShape.localScale = startingScale + (new Vector3(slider.value/4, -slider.value/4, 0) + new Vector3(-slider2.value/5, slider2.value/8, 0));
+        }
          
-         if(kneadNumber == 20)
-         {
-             doughSprite.sprite = secondDough;
-         }
+        if(kneadNumber == 20)
+        {
+            doughSprite.sprite = secondDough;
+        }
 
-         if(kneadNumber == 40)
-         {
-             doughSprite.sprite = finalDough;
-             isGameDone = true;
-         }
-
-
+        if(kneadNumber == 40)
+        {
+            doughSprite.sprite = finalDough;
+            isGameDone = true;
+        }
     }
 
 }
