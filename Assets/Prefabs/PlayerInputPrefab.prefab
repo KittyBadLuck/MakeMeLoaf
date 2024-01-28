@@ -162,9 +162,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 7532583232182958067}
   miniGame1: {fileID: 0}
-  sliderPref: {fileID: 0}
+  Mini1Prefab: {fileID: 0}
   slider: {fileID: 0}
   slider2: {fileID: 0}
+  playing1: 0
+  miniGame2: {fileID: 2748358114567332986, guid: 57f6b5d6839d07147b509ddef22252cc, type: 3}
+  Mini2Prefab: {fileID: 4470445505903493218, guid: 57f6b5d6839d07147b509ddef22252cc, type: 3}
+  playing2: 0
   comptoirCanvas: {fileID: 0}
 --- !u!1001 &4535018986684068547
 PrefabInstance:
