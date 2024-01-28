@@ -1,9 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Cinemachine;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
+using Image = UnityEngine.UI.Image;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +20,15 @@ public class GameManager : MonoBehaviour
     public int playerMax = 4;
     private PlayerInputManager playerInputManager;
 
+    [Header("JoinScreen")] 
+    public Canvas joinScreen;
+
+    public TextMeshProUGUI joinText;
+    public List<Image> playerImages;
+    public List<Sprite> playerSprites;
+    private float targetTime = 2;
+    private bool playerSelected;
+
     [Header("Minigame")]
     public Canvas minigame;
     public Canvas comptoir; 
@@ -25,7 +39,29 @@ public class GameManager : MonoBehaviour
         playerInputManager = FindObjectOfType<PlayerInputManager>();
         
     }
-    
+
+    private void Update()
+    {
+        if (playerSelected)
+        {
+            targetTime -= Time.deltaTime;
+
+            if (targetTime <= 0.0f)
+            {
+                timerEnded();
+            }
+        }
+    }
+
+    private void timerEnded()
+    {
+        foreach (var player in players)
+        {
+            player.ActivateInput();
+        }
+        joinScreen.gameObject.SetActive(false);
+    }
+
     public void AddPlayer(PlayerInput player)
     {
         players.Add(player);
@@ -45,6 +81,14 @@ public class GameManager : MonoBehaviour
         playerParent.GetComponent<PlayerInputHandler>().Mini2Prefab = minigame2;
         playerParent.GetComponent<PlayerInputHandler>().comptoirCanvas = comptoir;
         playerParent.GetComponentInChildren<Animator>().runtimeAnimatorController = playerAnimators[players.Count - 1];
+
+        playerImages[players.Count - 1].sprite = playerSprites[players.Count - 1];
+        players.LastOrDefault().DeactivateInput();
+        if (players.Count >= 2)
+        {
+            joinText.text = "Starting Game!";
+            playerSelected = true;
+        }
 
     }
 }
