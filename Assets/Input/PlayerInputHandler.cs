@@ -14,6 +14,7 @@ public class PlayerInputHandler : MonoBehaviour
     public float test;
     public Canvas sliderPref;
     public Slider slider;
+    public Slider slider2;
 
 
     private void Awake()
@@ -24,7 +25,8 @@ public class PlayerInputHandler : MonoBehaviour
             transform.parent = _playerController.transform;
         }
 
-        slider = GameObject.Instantiate(sliderPref).GetComponentInChildren<Slider>();
+        slider = sliderPref.GetComponentsInChildren<Slider>()[0];
+        slider2 = sliderPref.GetComponentsInChildren<Slider>()[1];
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -42,9 +44,15 @@ public class PlayerInputHandler : MonoBehaviour
         }
     }
 
-    public void Test(InputAction.CallbackContext context)
+    public void LeftKnead(InputAction.CallbackContext context)
     {
+
         slider.value = context.ReadValue<float>();
+    }
+
+    public void RightKnead(InputAction.CallbackContext context)
+    {
+        slider2.value = context.ReadValue<float>();
     }
     
     

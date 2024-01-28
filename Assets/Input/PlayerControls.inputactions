@@ -33,9 +33,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Test",
+                    "name": "LeftKnead",
                     "type": "PassThrough",
                     "id": "6b4432d3-99e7-4120-aedc-1815fbbb3ff6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RightKnead",
+                    "type": "PassThrough",
+                    "id": "b54b660b-e18e-471d-a348-e29ab6ef4262",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -160,7 +169,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KB+M",
-                    "action": "Test",
+                    "action": "LeftKnead",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -171,7 +180,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "GamePad",
-                    "action": "Test",
+                    "action": "LeftKnead",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2aa937c3-8d9f-4502-9fe5-da1b3d83f2ad",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KB+M",
+                    "action": "RightKnead",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "25ee94d5-0b1c-446f-9441-532f70aab626",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GamePad",
+                    "action": "RightKnead",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
