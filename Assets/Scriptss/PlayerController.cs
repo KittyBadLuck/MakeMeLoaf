@@ -173,6 +173,7 @@ public class PlayerController : MonoBehaviour
                     liftHandler.liftingPlayer = null;
                     liftHandler.gameObject.transform.position = inputHandler.miniGame1.doughSpawn.position;
                     isLifting = false;
+                    liftedObject = null;
                 }
                 else if (isNearMini2 && inputHandler.miniGame2.canUse)
                 {
@@ -182,6 +183,7 @@ public class PlayerController : MonoBehaviour
                     liftHandler.liftingPlayer = null;
                     liftHandler.gameObject.transform.position = inputHandler.miniGame2.spawnPoint.position;
                     isLifting = false;
+                    liftedObject = null;
                 }
             }
         }
@@ -227,21 +229,13 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public bool Lift(GameObject dough)
+    public void Lift(GameObject dough)
     {
-        if (isLifting)
-        {
-            return false;
-        }
-        else
-        {
-            dough.transform.position = this.transform.position + new Vector3(0, yClimbOffset, 0);
-            dough.GetComponent<LiftedHandler>().liftingPlayer = this;
-            dough.GetComponent<LiftedHandler>().isLifted = true;
-            isLifting = true;
-            liftedObject = dough;
-            return true;
-        }
+        dough.transform.position = this.transform.position + new Vector3(0, yClimbOffset, 0);
+        dough.GetComponent<LiftedHandler>().liftingPlayer = this;
+        dough.GetComponent<LiftedHandler>().isLifted = true;
+        isLifting = true;
+        liftedObject = dough;
     }
     
     GameObject GetClosestPlayer(List<GameObject> players)

@@ -61,7 +61,10 @@ public class MiniGame1 : MonoBehaviour
     void SpawnDough()
     {
         dough = GameObject.Instantiate(doughPrefab, doughSpawn);
-        
+        isGameDone = false;
+        targetTime = 2f;
+        kneadNumber = 0;
+        doughSprite.sprite = firstDough;
     }
 
     void Kneading()

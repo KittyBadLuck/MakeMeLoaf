@@ -56,8 +56,10 @@ public class PlayerInputHandler : MonoBehaviour
                 {
                     if (_playerController.isNearMini1)
                     {
-                        if (_playerController.Lift(miniGame1.dough))
+
+                        if (miniGame1.dough != null)
                         {
+                            _playerController.Lift(miniGame1.dough);
                             miniGame1.dough = null;
                             miniGame1.canUse = true;
                         }
