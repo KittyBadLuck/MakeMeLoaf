@@ -17,6 +17,7 @@ public class MiniGame2 : MonoBehaviour
     public Transform peet1;
     public Transform peet2;
     public Transform peet3;
+    public bool isGameDone = false;
     
     public 
     // Start is called before the first frame update
@@ -36,7 +37,10 @@ public class MiniGame2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Vector3.Equals(peet1.localScale,new Vector3(0.52f, 0.52f, 0.52f)) && Vector3.Equals(peet2.localScale,new Vector3(0.52f, 0.52f, 0.52f)) && Vector3.Equals(peet3.localScale,new Vector3(0.52f, 0.52f, 0.52f)))
+        {
+            isGameDone = true;
+        }
     }
 
     public void Smash()
@@ -72,17 +76,26 @@ public class MiniGame2 : MonoBehaviour
     
     public void RetractPeet1()
     {
-        Debug.Log("bsr");
+        if(slapNumber>28)
+        {
+            peet1.localScale -= new Vector3(0.06f, 0.06f, 0.06f);
+        }
+        
     }
     public void RetractPeet2()
     {
-        Debug.Log("bsr");
+        if(slapNumber>28)
+        {
+            peet2.localScale -= new Vector3(0.06f, 0.06f, 0.06f);
+        }
     }
     public void RetractPeet3()
     {
-        Debug.Log("bsr");
+        if(slapNumber>28)
+        {
+            peet3.localScale -= new Vector3(0.06f, 0.06f, 0.06f);
+        }
+        Debug.Log(slapNumber);
     }
-    
-
 
 }
