@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour
     public int playerMax = 4;
     private PlayerInputManager playerInputManager;
 
+    [Header("Minigame")]
+    public Canvas minigame;
+
     private void Awake()
     {
         playerInputManager = FindObjectOfType<PlayerInputManager>();
@@ -37,6 +40,7 @@ public class GameManager : MonoBehaviour
         playerParent.GetComponentInChildren<CinemachineVirtualCamera>().gameObject.layer = layerToAdd;
         //add the layer
         playerParent.GetComponentInChildren<Camera>().cullingMask |= 1 << layerToAdd;
+        playerParent.GetComponent<PlayerInputHandler>().sliderPref = minigame;
         playerParent.GetComponentInChildren<Animator>().runtimeAnimatorController = playerAnimators[players.Count - 1];
 
     }
