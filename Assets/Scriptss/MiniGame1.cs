@@ -22,6 +22,8 @@ public class MiniGame1 : MonoBehaviour
     private float targetTime = 2f;
     public PlayerInputHandler player;
     public bool canUse = true;
+    public Transform doughSpawn;
+    public GameObject doughPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -57,6 +59,7 @@ public class MiniGame1 : MonoBehaviour
 
     void SpawnDough()
     {
+        GameObject.Instantiate(doughPrefab, doughSpawn);
         canUse = false;
     }
 
