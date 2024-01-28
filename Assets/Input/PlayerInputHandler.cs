@@ -155,7 +155,7 @@ public class PlayerInputHandler : MonoBehaviour
 
             }
 
-            miniGame2.Smash();
+           // miniGame2.Smash();
         }
     }
 

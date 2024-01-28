@@ -14,7 +14,7 @@ public class Comptoir : MonoBehaviour
     public HUDCount hub;
 
     public GameObject selectedDefault;
-    public Canvas canvas;
+    public GameObject canvas;
 
     private EventSystem _eventSystem;
     public bool isOpen;
@@ -28,19 +28,18 @@ public class Comptoir : MonoBehaviour
     {
         if (isOpen == false)
         {
+            print("open");
             isOpen = true;
-            canvas.gameObject.SetActive(true);
+            canvas.SetActive(true);
         }
     }
 
     public void Close()
     {
-        if (isOpen)
-        {
-            isOpen = false;
-            canvas.gameObject.SetActive(false);
-        }
-        
+        print("close");
+        isOpen = false;
+        canvas.SetActive(false);
+
     }
 
     public void TakeOrder()
