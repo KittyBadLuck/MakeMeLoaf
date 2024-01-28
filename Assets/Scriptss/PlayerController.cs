@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     public SpriteRenderer renderer;
     private Vector2 move;
+    private Animator _animator;
     
     public bool isNearPlayer;
     public List<GameObject> climbablePlayer;
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
     void FixedUpdate()
@@ -36,7 +38,30 @@ public class PlayerController : MonoBehaviour
 
         if (move != Vector2.zero)
         {
-            gameObject.transform.right = Vector2.Lerp(transform.right, move, 0.1f);
+            //gameObject.transform.right = Vector2.Lerp(transform.right, move, 0.1f);
+            if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("CatWalk1"))
+            {
+                print("call animation");
+                _animator.Play("CatWalk1");
+            }
+
+            if (move.x > 0)
+            {
+                renderer.flipX = true;
+            }
+            else
+            {
+                renderer.flipX = false;
+            }
+            
+        }
+        else
+        {
+            if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("CatIdle1"))
+            {
+                _animator.Play("CatIdle1");
+            }
+           
         }
 
         if (isLifted)

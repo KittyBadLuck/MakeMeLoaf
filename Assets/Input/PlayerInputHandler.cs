@@ -23,7 +23,6 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        
         _playerController.OnMove(context);
 
             
