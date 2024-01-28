@@ -42,7 +42,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (!playing1)
+        if (!playing1 && !playing2)
         {
             _playerController.OnMove(context);
         }
@@ -50,9 +50,9 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnClimb(InputAction.CallbackContext context)
     {
-        if (!playing1)
+        if (context.performed)
         {
-            if (context.performed)
+            if (!playing1 && !playing2)
             {
                 if (!_playerController.isLifting)
                 {
@@ -65,6 +65,15 @@ public class PlayerInputHandler : MonoBehaviour
                             miniGame1.canUse = true;
                         }
                     }
+                    else if (_playerController.isNearMini2)
+                    {
+                        if (miniGame2.doughWorld != null)
+                        {
+                            _playerController.Lift(miniGame2.doughWorld);
+                            miniGame2.doughWorld = null;
+                            miniGame2.canUse = true;
+                        }
+                    }
                     else if (_playerController.isNearMini3)
                     {
                         if (miniGame3.bakedDough != null)
@@ -72,7 +81,6 @@ public class PlayerInputHandler : MonoBehaviour
                             _playerController.Lift(miniGame3.bakedDough);
                             miniGame3.bakedDough.SetActive(true);
                             miniGame3.GetDough();
-
                         }
                     }
                     else
@@ -84,17 +92,13 @@ public class PlayerInputHandler : MonoBehaviour
                 {
                     _playerController.Drop(this);
                 }
-                
-                
             }
-            
+            if(playing2)
+            {
+                miniGame2.RetractPeet1();
+            }
         }
-
-        if(context.performed)
-        {
-            miniGame2.RetractPeet1();
-        }
-
+        
     }
 
     public void LeftKnead(InputAction.CallbackContext context)
@@ -103,7 +107,6 @@ public class PlayerInputHandler : MonoBehaviour
         {
             slider.value = context.ReadValue<float>();
         }
-        
     }
 
     public void RightKnead(InputAction.CallbackContext context)
@@ -133,29 +136,24 @@ public class PlayerInputHandler : MonoBehaviour
                 playing1 = true;
             }
 
-            if (_playerController.isNearMini3)
+            if (_playerController.isNearMini2 && miniGame2.canUse)
             {
-                if (miniGame3.canUse)
+                if (miniGame2.doughWorld)
                 {
-                    if (_playerController.isLifted && _playerController.isLifting)
-                    {
-                        if (_playerController.liftedObject.GetComponent<LiftedHandler>().isReadyToBake &&
-                            (_playerController.liftedObject.GetComponent<LiftedHandler>().isBaked == false))
-                        {
-
-                            miniGame3.Bake();
-                            GameObject.Destroy(_playerController.liftedObject);
-                            _playerController.liftedObject = null;
-                            _playerController.isLifting = false;
-                        }
-
-                    }
+                    _playerController.move = new Vector2(0, 0);
+                    Mini2Prefab.gameObject.SetActive(true);
+                    miniGame2.player = this;
+                    Mini2Prefab.worldCamera = this.gameObject.GetComponent<PlayerInput>().camera;
+                    playing2 = true;
+                    miniGame2.canUse = true;
                 }
-
-
+              
+            }
+            if (playing2)
+            {
+                miniGame2.Smash();
             }
 
-           // miniGame2.Smash();
         }
     }
 
@@ -163,7 +161,11 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if(context.performed)
         {
-            miniGame2.RetractPeet3();
+            if (playing2)
+            {
+                miniGame2.RetractPeet3();
+            }
+           
         }
     }
 
@@ -171,7 +173,10 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if(context.performed)
         {
-            miniGame2.RetractPeet2();
+            if (playing2)
+            {
+                miniGame2.RetractPeet2();
+            }
         }
     }
     

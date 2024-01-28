@@ -243,7 +243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLifted: 0
   isKneadedDough: 1
-  isReadyToBake: 1
+  isReadyToBake: 0
   isBaked: 0
   liftingPlayer: {fileID: 0}
   doughSprite: {fileID: 4458572101678391604}

@@ -5,7 +5,13 @@ using UnityEngine;
 public class MiniGame2 : MonoBehaviour
 {
     public bool canUse = true;
+    public GameObject doughWorld;
     public Transform spawnPoint;
+    public Sprite doughReadySprite;
+    public PlayerInputHandler player;
+
+    private List<int> peetNumber = new List<int>();
+
     public GameObject dough;
     private Animation doughAnimation;
     public GameObject pattoune;
@@ -18,10 +24,11 @@ public class MiniGame2 : MonoBehaviour
     public Transform peet2;
     public Transform peet3;
     public bool isGameDone = false;
+
+    private float targetTime = 2f;
     
-    public 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         doughAnimation = dough.GetComponent<Animation>();
         pattouneAnimation = pattoune.GetComponent<Animation>();
@@ -32,20 +39,57 @@ public class MiniGame2 : MonoBehaviour
         face.localScale = new Vector3(1f, 0f, 1f);
         
         slapNumber = 0;
+        peetNumber.Add(0);
+        peetNumber.Add(0);
+        peetNumber.Add(0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Vector3.Equals(peet1.localScale,new Vector3(0.52f, 0.52f, 0.52f)) && Vector3.Equals(peet2.localScale,new Vector3(0.52f, 0.52f, 0.52f)) && Vector3.Equals(peet3.localScale,new Vector3(0.52f, 0.52f, 0.52f)))
+        if(peetNumber[0] >= 8 
+           && peetNumber[1] >= 8
+           && peetNumber[2] >= 8)
         {
             isGameDone = true;
         }
+        
+        if (isGameDone)
+        {
+            targetTime -= Time.deltaTime;
+
+            if (targetTime <= 0.0f)
+            {
+                timerEnded();
+            }
+        }
+    }
+    
+    void timerEnded()
+    {
+        player.playing2 = false;
+        SpawnDough();
+        this.gameObject.SetActive(false);
+    }
+
+    void SpawnDough()
+    {
+        isGameDone = false;
+        targetTime = 2f;
+        slapNumber = 0;
+        peets.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        face.localScale = new Vector3(1f, 0f, 1f);
+        peetNumber[0] = 0;
+        peetNumber[1] = 0;
+        peetNumber[2] = 0;
+        doughWorld.GetComponent<LiftedHandler>().doughSprite.sprite = doughReadySprite;
+        doughWorld.GetComponent<LiftedHandler>().isReadyToBake = true;
+        doughWorld.GetComponent<LiftedHandler>().isKneadedDough = false;
     }
 
     public void Smash()
     {
-        Debug.Log("ça marche");
+
         if(doughAnimation.isPlaying)
         {
             doughAnimation.Stop("MiniGame2Dough");
@@ -79,6 +123,7 @@ public class MiniGame2 : MonoBehaviour
         if(slapNumber>28)
         {
             peet1.localScale -= new Vector3(0.06f, 0.06f, 0.06f);
+            peetNumber[0] += 1;
         }
         
     }
@@ -87,6 +132,7 @@ public class MiniGame2 : MonoBehaviour
         if(slapNumber>28)
         {
             peet2.localScale -= new Vector3(0.06f, 0.06f, 0.06f);
+            peetNumber[1] += 1;
         }
     }
     public void RetractPeet3()
@@ -94,8 +140,8 @@ public class MiniGame2 : MonoBehaviour
         if(slapNumber>28)
         {
             peet3.localScale -= new Vector3(0.06f, 0.06f, 0.06f);
+            peetNumber[2] += 1;
         }
-        Debug.Log(slapNumber);
     }
 
 }

@@ -100,8 +100,7 @@ public class PlayerController : MonoBehaviour
                             _animator.Play("CatWalkDown");
                         }
                     }
-                  
-                
+
                 }
             }
 
@@ -131,8 +130,7 @@ public class PlayerController : MonoBehaviour
                     _animator.Play("CatIdle");
                 }
             }
-           
-           
+
         }
 
     }
@@ -159,36 +157,52 @@ public class PlayerController : MonoBehaviour
         else
         {
             LiftedHandler liftHandler = liftedObject.GetComponent<LiftedHandler>();
-            if (liftHandler.isBaked)
+
+            if (isNearMini1 && inputHandler.miniGame1.canUse)
             {
-                
-            }
-            else if (liftHandler.isReadyToBake)
-            {
-               
-            }
-            else if (liftHandler.isKneadedDough)
-            {
-                if (isNearMini1 && inputHandler.miniGame1.canUse)
+                if (liftHandler.isKneadedDough)
                 {
                     inputHandler.miniGame1.canUse = false;
                     inputHandler.miniGame1.dough = liftHandler.gameObject;
-                    liftHandler.isLifted = false;
-                    liftHandler.liftingPlayer = null;
                     liftHandler.gameObject.transform.position = inputHandler.miniGame1.doughSpawn.position;
-                    isLifting = false;
-                    liftedObject = null;
                 }
-                else if (isNearMini2 && inputHandler.miniGame2.canUse)
+            }
+            else if (isNearMini2 && inputHandler.miniGame2.doughWorld == null)
+            {
+                if (liftHandler.isKneadedDough)
+                {
+                    inputHandler.miniGame2.canUse = true;
+                    inputHandler.miniGame2.doughWorld = liftHandler.gameObject;
+                    liftHandler.gameObject.transform.position = inputHandler.miniGame2.spawnPoint.position;
+                }
+                else if (liftHandler.isReadyToBake)
                 {
                     inputHandler.miniGame2.canUse = false;
-                    inputHandler.miniGame2.dough = liftHandler.gameObject;
-                    liftHandler.isLifted = false;
-                    liftHandler.liftingPlayer = null;
+                    inputHandler.miniGame2.doughWorld = liftHandler.gameObject;
                     liftHandler.gameObject.transform.position = inputHandler.miniGame2.spawnPoint.position;
-                    isLifting = false;
-                    liftedObject = null;
+
                 }
+
+                liftHandler.isLifted = false;
+                liftHandler.liftingPlayer = null;
+                isLifting = false;
+                liftedObject = null;
+            }
+            else if (isNearMini3 && inputHandler.miniGame3.canUse)
+            {
+                if (isLifted)
+                {
+                    if (liftHandler.isReadyToBake &&
+                        (liftHandler.isBaked == false))
+                    {
+                        inputHandler.miniGame3.Bake();
+                        GameObject.Destroy(liftedObject);
+                        liftedObject = null;
+                        isLifting = false;
+                    }
+
+                }
+
             }
         }
     }

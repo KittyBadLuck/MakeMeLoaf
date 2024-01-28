@@ -44,6 +44,8 @@ public class MiniGame3 : MonoBehaviour
         bakingIndicator.GetComponent<SpriteRenderer>().color = Color.yellow;
         bakedDough = GameObject.Instantiate(bakedPrefab);
         bakedDough.GetComponent<LiftedHandler>().isBaked = true;
+        bakedDough.GetComponent<LiftedHandler>().isReadyToBake = false;
+        bakedDough.GetComponent<LiftedHandler>().isKneadedDough = false;
         int i = Random.Range(0, 2);
         bakedDough.GetComponent<LiftedHandler>().doughSprite.sprite = bakedSprites[i];
         bakedDough.SetActive(false);

@@ -42,7 +42,6 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         playerInputManager = FindObjectOfType<PlayerInputManager>();
-        pController = players[0].gameObject.GetComponent<PlayerInputHandler>()._playerController;
     }
 
     private void Update()
@@ -55,35 +54,38 @@ public class GameManager : MonoBehaviour
             {
                 timerEnded();
             }
+            
+            if (pController.hasHat && pController.isLifted)
+            {
+                if(pController.playerClimbed.GetComponent<PlayerController>().hasCoat)
+                {
+                    playersHidden = true;
+                }
+            }
+            else if (pController.hasCoat && pController.isLifting)
+            {
+                if(pController.liftedObject.CompareTag("Player") && pController.liftedObject.GetComponent<PlayerController>().hasCoat)
+                {
+                    playersHidden = true;
+                }
+            }
+            else
+            {
+                playersHidden = false;
+            }
+
+            if (playersHidden)
+            {
+                passageBlock.SetActive(false);
+            }
+            else
+            {
+                passageBlock.SetActive(true);
+            }
         }
         
-        if (pController.hasHat && pController.isLifted)
-        {
-            if(pController.playerClimbed.GetComponent<PlayerController>().hasCoat)
-            {
-                playersHidden = true;
-            }
-        }
-        else if (pController.hasCoat && pController.isLifting)
-        {
-            if(pController.liftedObject.CompareTag("Player") && pController.liftedObject.GetComponent<PlayerController>().hasCoat)
-            {
-                playersHidden = true;
-            }
-        }
-        else
-        {
-            playersHidden = false;
-        }
+        
 
-        if (playersHidden)
-        {
-            passageBlock.SetActive(false);
-        }
-        else
-        {
-            passageBlock.SetActive(true);
-        }
     }
 
     private void timerEnded()
@@ -98,6 +100,7 @@ public class GameManager : MonoBehaviour
     public void AddPlayer(PlayerInput player)
     {
         players.Add(player);
+        pController = players[0].gameObject.GetComponent<PlayerInputHandler>()._playerController;
 
         //need to use the parent due to the structure of the prefab
         Transform playerParent = player.transform;
