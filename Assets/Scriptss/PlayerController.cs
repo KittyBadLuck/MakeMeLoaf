@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour
     public float climbMoveLimit = 0.5f;
 
     public bool hasHat;
-    public bool hasCoat;
 
     [Header("Minigame")] 
     public bool isNearCounter;
@@ -28,6 +27,8 @@ public class PlayerController : MonoBehaviour
     public Camera camera;
     private Rigidbody2D _rigidbody2D;
     public SpriteRenderer renderer;
+    public GameObject hat;
+    public SpriteRenderer hatRenderer;
     public Vector2 move;
     private Animator _animator;
     
@@ -47,7 +48,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        
+
         if (isLifted)
         {
             transform.position = playerClimbed.transform.position + new Vector3(0,yClimbOffset,0 );
@@ -77,12 +78,12 @@ public class PlayerController : MonoBehaviour
                     }
                     else
                     {
-                        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("CatWalkSide"))
+                        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("CatWalSide"))
                         {
                             _animator.Play("CatWalkSide");
                         }
                     }
-                    
+
                 }
                 else
                 { 
@@ -99,6 +100,24 @@ public class PlayerController : MonoBehaviour
                         {
                             _animator.Play("CatWalkDown");
                         }
+                    }
+
+                }
+            }
+            else if (hasHat)
+            {
+                if (move.y >= 0)
+                {
+                    if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("CatAboveSide"))
+                    {
+                        _animator.Play("CatAboveSide");
+                    }
+                }
+                else
+                { 
+                    if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("CatAboveDown"))
+                    {
+                        _animator.Play("CatAboveDown");
                     }
 
                 }

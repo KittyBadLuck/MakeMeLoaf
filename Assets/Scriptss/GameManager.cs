@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     public List<Sprite> playerSprites;
     private float targetTime = 2;
     private bool playerSelected;
-    private PlayerController pController;
+    
 
     [Header("Minigame")]
     public Canvas minigame;
@@ -54,25 +54,9 @@ public class GameManager : MonoBehaviour
             {
                 timerEnded();
             }
-            
-            if (pController.hasHat && pController.isLifted)
-            {
-                if(pController.playerClimbed.GetComponent<PlayerController>().hasCoat)
-                {
-                    playersHidden = true;
-                }
-            }
-            else if (pController.hasCoat && pController.isLifting)
-            {
-                if(pController.liftedObject.CompareTag("Player") && pController.liftedObject.GetComponent<PlayerController>().hasCoat)
-                {
-                    playersHidden = true;
-                }
-            }
-            else
-            {
-                playersHidden = false;
-            }
+
+
+            CheckHidden();
 
             if (playersHidden)
             {
@@ -88,6 +72,27 @@ public class GameManager : MonoBehaviour
 
     }
 
+    private void CheckHidden()
+    {
+        bool hidden = false;
+        foreach (var player in  players)
+        {
+            PlayerController pController = player.gameObject.GetComponent<PlayerInputHandler>()._playerController;
+            if (pController.hasHat && pController.isLifted)
+            {
+                hidden = true;
+            }
+        }
+
+        if (hidden == false)
+        {
+            playersHidden = false;
+        }
+        else
+        {
+            playersHidden = true;
+        }
+    }
     private void timerEnded()
     {
         foreach (var player in players)
@@ -100,7 +105,7 @@ public class GameManager : MonoBehaviour
     public void AddPlayer(PlayerInput player)
     {
         players.Add(player);
-        pController = players[0].gameObject.GetComponent<PlayerInputHandler>()._playerController;
+        
 
         //need to use the parent due to the structure of the prefab
         Transform playerParent = player.transform;
