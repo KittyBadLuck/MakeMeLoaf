@@ -125,24 +125,44 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if ( !isLifting && isNearPlayer && climbablePlayer.Count > 0)
+            if ( !isLifting) 
             {
-                GameObject closest = GetClosestPlayer(climbablePlayer);
-
-                if (closest)
+                if (isNearPlayer && climbablePlayer.Count > 0)
                 {
-                    closest.GetComponent<PlayerController>().isLifting = true;
-                    renderer.sortingOrder += closest.GetComponent<PlayerController>().renderer.sortingOrder + 1;
-                    Transform t = this.transform;
-                    Transform climbT = closest.transform;
-                    transform.position = climbT.position + new Vector3(0, yClimbOffset, 0);
-                    playerClimbed = closest;
-                    isLifted = true;
+                    GameObject closest = GetClosestPlayer(climbablePlayer);
+
+                    if (closest)
+                    {
+                        closest.GetComponent<PlayerController>().isLifting = true;
+                        renderer.sortingOrder += closest.GetComponent<PlayerController>().renderer.sortingOrder + 1;
+                        Transform t = this.transform;
+                        Transform climbT = closest.transform;
+                        transform.position = climbT.position + new Vector3(0, yClimbOffset, 0);
+                        playerClimbed = closest;
+                        isLifted = true;
+                    }
                 }
+               
+                
             }
         }
 
-       
+    }
+
+    public bool Lift(GameObject dough)
+    {
+        if (isLifting)
+        {
+            return false;
+        }
+        else
+        {
+            dough.transform.position = this.transform.position + new Vector3(0, yClimbOffset, 0);
+            dough.GetComponent<LiftedHandler>().liftingPlayer = this;
+            dough.GetComponent<LiftedHandler>().isLifted = true;
+            isLifting = true;
+            return true;
+        }
     }
     
     GameObject GetClosestPlayer(List<GameObject> players)

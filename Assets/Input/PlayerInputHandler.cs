@@ -48,8 +48,21 @@ public class PlayerInputHandler : MonoBehaviour
         {
             if (context.started)
             {
-                _playerController.Climb(context);
+                if (_playerController.isNearMini1)
+                {
+                    if (_playerController.Lift(miniGame1.dough))
+                    {
+                        miniGame1.dough = null;
+                        miniGame1.canUse = true;
+                    }
+                }
+                else
+                {
+                    _playerController.Climb(context);
+                }
+                
             }
+            
         }
     }
 
@@ -84,6 +97,7 @@ public class PlayerInputHandler : MonoBehaviour
             miniGame1.player = this;
             playing1 = true;
         }
+        
     }
     
     
