@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     public float climbMoveLimit = 0.5f;
 
     public bool hasHat;
+    public bool isNearDisguise;
+    public bool inCounterZone;
 
     [Header("Minigame")] 
     public bool isNearCounter;
@@ -65,7 +67,26 @@ public class PlayerController : MonoBehaviour
 
         if (move != Vector2.zero)
         {
-            if (!isLifted)
+            if (hasHat && isLifted)
+            {
+                if (move.y >= 0)
+                {
+                    if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("CatAboveSide"))
+                    {
+                        _animator.Play("CatAboveSide");
+                    }
+                }
+                else
+                { 
+                    if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("CatAboveDown"))
+                    {
+                        _animator.Play("CatAboveDown");
+                    }
+
+                }
+                
+            }
+            else
             {
                 if (move.y >= 0)
                 {
@@ -104,38 +125,30 @@ public class PlayerController : MonoBehaviour
 
                 }
             }
-            else if (hasHat)
-            {
-                if (move.y >= 0)
-                {
-                    if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("CatAboveSide"))
-                    {
-                        _animator.Play("CatAboveSide");
-                    }
-                }
-                else
-                { 
-                    if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("CatAboveDown"))
-                    {
-                        _animator.Play("CatAboveDown");
-                    }
-
-                }
-            }
 
             if (move.x >= 0)
             {
                 renderer.flipX = true;
+                hatRenderer.flipX = true;
             }
             else
             {
                 renderer.flipX = false;
+                hatRenderer.flipX = false;
             }
             
         }
         else
         {
-            if (isLifting)
+            if (isLifted && hasHat)
+            {
+                if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("CatAboveDown"))
+                {
+                    _animator.Play("CatAboveDown");
+                }
+                
+            }
+            else if (isLifting)
             {
                 if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("CatHoldIdle"))
                 {
@@ -331,6 +344,10 @@ public class PlayerController : MonoBehaviour
         {
             isNearCounter = true;
         }
+        if (other.CompareTag("Disguise"))
+        {
+            isNearDisguise= true;
+        }
     }
     
 
@@ -361,6 +378,10 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Counter"))
         {
             isNearCounter = false;
+        }
+        if (other.CompareTag("Disguise"))
+        {
+            isNearDisguise= false;
         }
     }
 }

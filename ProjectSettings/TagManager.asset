@@ -8,6 +8,8 @@ TagManager:
   - MiniGame2
   - MiniGame3
   - Counter
+  - Disguise
+  - CounterZone
   layers:
   - Default
   - TransparentFX

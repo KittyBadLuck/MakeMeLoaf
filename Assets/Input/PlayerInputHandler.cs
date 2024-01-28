@@ -10,6 +10,7 @@ public class PlayerInputHandler : MonoBehaviour
 {
     public GameObject playerPrefab;
     public PlayerController _playerController;
+    public DisguiseManager disguise;
     
     [Header("Minigame")]
     public MiniGame1 miniGame1;
@@ -52,7 +53,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (context.performed)
         {
-            if (!playing1 && !playing2)
+            if (!playing1 && !playing2 && !_playerController.inCounterZone)
             {
                 if (!_playerController.isLifting)
                 {
@@ -124,6 +125,24 @@ public class PlayerInputHandler : MonoBehaviour
             if (_playerController.isNearCounter && !comptoir.isOpen)
             {
                 comptoir.Open();
+            }
+
+            if (_playerController.isNearDisguise)
+            {
+                if (disguise.filled)
+                {
+                    _playerController.hasHat = true;
+                    _playerController.hat.SetActive(true);
+                    disguise.filled = false;
+                    disguise.boxRender.sprite = disguise.boxEmptySprite;
+                }
+                else if (_playerController.hasHat)
+                {
+                    _playerController.hasHat = false;
+                    _playerController.hat.SetActive(false);
+                    disguise.filled = true;
+                    disguise.boxRender.sprite = disguise.boxFillSprite;
+                }
             }
 
             if (_playerController.isNearMini1 && miniGame1.canUse)
