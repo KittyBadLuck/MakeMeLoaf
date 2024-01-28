@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using Unity.VisualScripting;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,13 +10,14 @@ public class GameManager : MonoBehaviour
     public List<PlayerInput> players;
     public List<LayerMask> playerLayers;
     public List<Transform> startingPoints;
-    public List<AnimatorController> playerAnimators;
+    public List<RuntimeAnimatorController> playerAnimators;
     private int playerCount = 0;
     public int playerMax = 4;
     private PlayerInputManager playerInputManager;
 
     [Header("Minigame")]
     public Canvas minigame;
+    public Canvas comptoir; 
 
     private void Awake()
     {
@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
         //add the layer
         playerParent.GetComponentInChildren<Camera>().cullingMask |= 1 << layerToAdd;
         playerParent.GetComponent<PlayerInputHandler>().sliderPref = minigame;
+        playerParent.GetComponent<PlayerInputHandler>().comptoirCanvas = comptoir;
         playerParent.GetComponentInChildren<Animator>().runtimeAnimatorController = playerAnimators[players.Count - 1];
 
     }

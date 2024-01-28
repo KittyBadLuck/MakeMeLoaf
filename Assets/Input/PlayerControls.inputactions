@@ -24,7 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Climb",
+                    "name": "Lift",
                     "type": "PassThrough",
                     "id": "663bb935-2e7a-494e-9cb0-48c8f5c8f5ca",
                     "expectedControlType": "Button",
@@ -46,6 +46,15 @@
                     "type": "PassThrough",
                     "id": "b54b660b-e18e-471d-a348-e29ab6ef4262",
                     "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Action",
+                    "type": "Button",
+                    "id": "e03ddce4-42fe-4b5c-af5e-ef5e5f25c050",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -121,7 +130,7 @@
                 {
                     "name": "",
                     "id": "d4425d5c-848d-4991-aec7-938296a05a6d",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
                     "groups": "GamePad",
@@ -147,7 +156,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KB+M",
-                    "action": "Climb",
+                    "action": "Lift",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -158,7 +167,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "GamePad",
-                    "action": "Climb",
+                    "action": "Lift",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -203,6 +212,28 @@
                     "processors": "",
                     "groups": "GamePad",
                     "action": "RightKnead",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dc147135-ba6a-4593-9e12-2054f6770160",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GamePad",
+                    "action": "Action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b8814ef3-d7cb-4c19-9f56-2a590eec5422",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KB+M",
+                    "action": "Action",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

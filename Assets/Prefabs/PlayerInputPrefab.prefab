@@ -127,6 +127,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: b54b660b-e18e-471d-a348-e29ab6ef4262
     m_ActionName: Player/RightKnead[/Keyboard/space,/DualSenseGamepadHID/rightTrigger]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1487631117128999194}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: Interaction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e03ddce4-42fe-4b5c-af5e-ef5e5f25c050
+    m_ActionName: Player/Action[/DualSenseGamepadHID/buttonSouth,/Keyboard/q]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -146,10 +162,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 7532583232182958067}
   miniGame1: {fileID: 0}
-  test: 0
   sliderPref: {fileID: 0}
   slider: {fileID: 0}
   slider2: {fileID: 0}
+  comptoirCanvas: {fileID: 0}
 --- !u!1001 &4535018986684068547
 PrefabInstance:
   m_ObjectHideFlags: 0
