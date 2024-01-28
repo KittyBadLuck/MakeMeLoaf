@@ -555,6 +555,11 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.35, y: 3}
   m_EdgeRadius: 0
+--- !u!224 &206845675 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6392843286727909431, guid: 57f6b5d6839d07147b509ddef22252cc, type: 3}
+  m_PrefabInstance: {fileID: 4470445505753990062}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &242001851
 GameObject:
   m_ObjectHideFlags: 0
@@ -2438,6 +2443,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5359414975705642211, guid: 6f3dbdd4221f1ae42ae3634a566e33fc, type: 3}
   m_PrefabInstance: {fileID: 1731219998}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &1749655882 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8680488698771984573, guid: 57f6b5d6839d07147b509ddef22252cc, type: 3}
+  m_PrefabInstance: {fileID: 4470445505753990062}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1760890854
 GameObject:
   m_ObjectHideFlags: 0
@@ -2718,10 +2728,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 202522958}
     m_Modifications:
-    - target: {fileID: 2748358114567332986, guid: 57f6b5d6839d07147b509ddef22252cc, type: 3}
-      propertyPath: canUse
-      value: 1
+    - target: {fileID: 1610014911582915399, guid: 57f6b5d6839d07147b509ddef22252cc, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2748358114567332986, guid: 57f6b5d6839d07147b509ddef22252cc, type: 3}
+      propertyPath: face
+      value: 
+      objectReference: {fileID: 1749655882}
+    - target: {fileID: 2748358114567332986, guid: 57f6b5d6839d07147b509ddef22252cc, type: 3}
+      propertyPath: peets
+      value: 
+      objectReference: {fileID: 206845675}
     - target: {fileID: 2748358114567332986, guid: 57f6b5d6839d07147b509ddef22252cc, type: 3}
       propertyPath: spawnPoint
       value: 
@@ -2729,10 +2747,6 @@ PrefabInstance:
     - target: {fileID: 4470445505903493222, guid: 57f6b5d6839d07147b509ddef22252cc, type: 3}
       propertyPath: m_Name
       value: MiniGame2 Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470445505903493222, guid: 57f6b5d6839d07147b509ddef22252cc, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4470445505903493223, guid: 57f6b5d6839d07147b509ddef22252cc, type: 3}
       propertyPath: m_Pivot.x
