@@ -23,7 +23,7 @@ public class PlayerInputHandler : MonoBehaviour
     public MiniGame3 miniGame3;
     
     [Header("Comptoire")]
-    public Canvas comptoirCanvas;
+    public Comptoir comptoir;
 
 
     private void Awake()
@@ -110,44 +110,48 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void Interaction(InputAction.CallbackContext context)
     {
-        if (_playerController.isNearCounter)
+        if (context.performed)
         {
-            comptoirCanvas.gameObject.SetActive(true);
-        }
-
-        if (_playerController.isNearMini1 && miniGame1.canUse)
-        {
-            Mini1Prefab.gameObject.SetActive(true);
-            Mini1Prefab.worldCamera = this.gameObject.GetComponent<PlayerInput>().camera;
-            miniGame1.player = this;
-            miniGame1.canUse = false;
-            _playerController.move = new Vector2(0, 0);
-            playing1 = true;
-        }
-
-        if (_playerController.isNearMini3)
-        {
-            if (miniGame3.canUse)
+            if (_playerController.isNearCounter && !comptoir.isOpen)
             {
-                if (_playerController.isLifted && _playerController.isLifting)
-                {
-                    if (_playerController.liftedObject.GetComponent<LiftedHandler>().isReadyToBake && (_playerController.liftedObject.GetComponent<LiftedHandler>().isBaked == false))
-                    {
-                    
-                        miniGame3.Bake();
-                        GameObject.Destroy(_playerController.liftedObject);
-                        _playerController.liftedObject = null;
-                        _playerController.isLifting = false;
-                    }
-                
-                }
+                comptoir.Open();
             }
+
+            if (_playerController.isNearMini1 && miniGame1.canUse)
+            {
+                Mini1Prefab.gameObject.SetActive(true);
+                Mini1Prefab.worldCamera = this.gameObject.GetComponent<PlayerInput>().camera;
+                miniGame1.player = this;
+                miniGame1.canUse = false;
+                _playerController.move = new Vector2(0, 0);
+                playing1 = true;
+            }
+
+            if (_playerController.isNearMini3)
+            {
+                if (miniGame3.canUse)
+                {
+                    if (_playerController.isLifted && _playerController.isLifting)
+                    {
+                        if (_playerController.liftedObject.GetComponent<LiftedHandler>().isReadyToBake && (_playerController.liftedObject.GetComponent<LiftedHandler>().isBaked == false))
+                        {
+                    
+                            miniGame3.Bake();
+                            GameObject.Destroy(_playerController.liftedObject);
+                            _playerController.liftedObject = null;
+                            _playerController.isLifting = false;
+                        }
+                
+                    }
+                }
             
                 
-        }
+            }
         
 
-        miniGame2.Smash();
+            miniGame2.Smash();
+        }
+
     }
     
     

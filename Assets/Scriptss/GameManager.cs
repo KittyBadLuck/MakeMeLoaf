@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Minigame")]
     public Canvas minigame;
-    public Canvas comptoir; 
+    public Comptoir comptoir; 
     public Canvas minigame2;
     public MiniGame3 minigame3;
 
@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
         playerParent.GetComponent<PlayerInputHandler>().Mini1Prefab = minigame;
         playerParent.GetComponent<PlayerInputHandler>().Mini2Prefab = minigame2;
         playerParent.GetComponent<PlayerInputHandler>().miniGame3 = minigame3;
-        playerParent.GetComponent<PlayerInputHandler>().comptoirCanvas = comptoir;
+        playerParent.GetComponent<PlayerInputHandler>().comptoir = comptoir;
         playerParent.GetComponentInChildren<Animator>().runtimeAnimatorController = playerAnimators[players.Count - 1];
 
         playerImages[players.Count - 1].sprite = playerSprites[players.Count - 1];
