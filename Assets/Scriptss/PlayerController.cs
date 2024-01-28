@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public bool isNearCounter;
 
     public bool isNearMini1;
+    public bool isNearMini2;
     
     [Header("Ref")]
     public Camera camera;
@@ -28,6 +30,7 @@ public class PlayerController : MonoBehaviour
     public bool isNearPlayer;
     public List<GameObject> climbablePlayer;
     public bool isLifting;
+    public GameObject liftedObject;
     private bool isLifted;
     private GameObject playerClimbed;
     
@@ -61,17 +64,39 @@ public class PlayerController : MonoBehaviour
             {
                 if (move.y >= 0)
                 {
-                    if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("CatWalkSide"))
+                    if (isLifting)
                     {
-                        _animator.Play("CatWalkSide");
+                        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("CatHoldSide"))
+                        {
+                            _animator.Play("CatHoldSide");
+                        }
                     }
+                    else
+                    {
+                        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("CatWalkSide"))
+                        {
+                            _animator.Play("CatWalkSide");
+                        }
+                    }
+                    
                 }
                 else
                 { 
-                    if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("CatWalkDown"))
+                    if (isLifting)
                     {
-                        _animator.Play("CatWalkDown");
+                        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("CatHoldDown"))
+                        {
+                            _animator.Play("CatHoldDown");
+                        }
                     }
+                    else
+                    {
+                        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("CatWalkDown"))
+                        {
+                            _animator.Play("CatWalkDown");
+                        }
+                    }
+                  
                 
                 }
             }
@@ -88,16 +113,27 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("CatIdle"))
+            if (isLifting)
             {
-                _animator.Play("CatIdle");
+                if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("CatHoldIdle"))
+                {
+                    _animator.Play("CatHoldIdle");
+                }
             }
+            else
+            {
+                if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("CatIdle"))
+                {
+                    _animator.Play("CatIdle");
+                }
+            }
+           
            
         }
 
     }
 
-    private void Fall()
+    public void Fall()
     {
         renderer.sortingOrder += 0;
         isLifted = false;
@@ -107,6 +143,47 @@ public class PlayerController : MonoBehaviour
         if (isLifting)
         {
             print("Make Lifted player fall too");
+        }
+    }
+
+    public void Drop(PlayerInputHandler inputHandler)
+    {
+        if (liftedObject.CompareTag("Player"))
+        {
+            liftedObject.GetComponent<PlayerController>().Fall();
+        }
+        else
+        {
+            LiftedHandler liftHandler = liftedObject.GetComponent<LiftedHandler>();
+            if (liftHandler.isBaked)
+            {
+                
+            }
+            else if (liftHandler.isReadyToBake)
+            {
+               
+            }
+            else if (liftHandler.isKneadedDough)
+            {
+                if (isNearMini1 && inputHandler.miniGame1.canUse)
+                {
+                    inputHandler.miniGame1.canUse = false;
+                    inputHandler.miniGame1.dough = liftHandler.gameObject;
+                    liftHandler.isLifted = false;
+                    liftHandler.liftingPlayer = null;
+                    liftHandler.gameObject.transform.position = inputHandler.miniGame1.doughSpawn.position;
+                    isLifting = false;
+                }
+                else if (isNearMini2 && inputHandler.miniGame2.canUse)
+                {
+                    inputHandler.miniGame2.canUse = false;
+                    inputHandler.miniGame2.dough = liftHandler.gameObject;
+                    liftHandler.isLifted = false;
+                    liftHandler.liftingPlayer = null;
+                    liftHandler.gameObject.transform.position = inputHandler.miniGame2.spawnPoint.position;
+                    isLifting = false;
+                }
+            }
         }
     }
 
@@ -139,6 +216,7 @@ public class PlayerController : MonoBehaviour
                         Transform climbT = closest.transform;
                         transform.position = climbT.position + new Vector3(0, yClimbOffset, 0);
                         playerClimbed = closest;
+                        playerClimbed.GetComponent<PlayerController>().liftedObject = this.gameObject;
                         isLifted = true;
                     }
                 }
@@ -161,6 +239,7 @@ public class PlayerController : MonoBehaviour
             dough.GetComponent<LiftedHandler>().liftingPlayer = this;
             dough.GetComponent<LiftedHandler>().isLifted = true;
             isLifting = true;
+            liftedObject = dough;
             return true;
         }
     }
@@ -199,6 +278,11 @@ public class PlayerController : MonoBehaviour
         {
             isNearMini1 = true;
         }
+        
+        if (other.CompareTag("MiniGame2"))
+        {
+            isNearMini2 = true;
+        }
     }
     
 
@@ -215,6 +299,11 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("MiniGame1"))
         {
             isNearMini1 = false;
+        }
+        
+        if (other.CompareTag("MiniGame2"))
+        {
+            isNearMini2 = false;
         }
     }
 }

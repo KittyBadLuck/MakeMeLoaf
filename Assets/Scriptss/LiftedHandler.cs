@@ -5,6 +5,9 @@ using UnityEngine;
 public class LiftedHandler : MonoBehaviour
 {
     public bool isLifted;
+    public bool isKneadedDough;
+    public bool isReadyToBake;
+    public bool isBaked;
     public PlayerController liftingPlayer;
 
     // Update is called once per frame

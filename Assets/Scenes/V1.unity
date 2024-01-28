@@ -507,7 +507,7 @@ GameObject:
   - component: {fileID: 202522959}
   m_Layer: 0
   m_Name: Game2
-  m_TagString: Untagged
+  m_TagString: MiniGame2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -520,10 +520,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 202522957}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.04, y: 2.21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1002122807}
   - {fileID: 153863113}
   m_Father: {fileID: 421283571}
   m_RootOrder: 1
@@ -552,7 +553,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.99, y: 2.35}
+  m_Size: {x: 2.35, y: 3}
   m_EdgeRadius: 0
 --- !u!1 &242001851
 GameObject:
@@ -632,65 +633,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &270268762
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 270268763}
-  - component: {fileID: 270268764}
-  m_Layer: 0
-  m_Name: Game2
-  m_TagString: MiniGame1
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &270268763
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 270268762}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.04, y: 2.21, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1002122807}
-  m_Father: {fileID: 421283571}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &270268764
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 270268762}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.35, y: 3}
-  m_EdgeRadius: 0
 --- !u!1001 &318221929
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -849,7 +791,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1438356769}
-  - {fileID: 270268763}
+  - {fileID: 202522958}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1140,7 +1082,7 @@ MonoBehaviour:
   playerMax: 2
   minigame: {fileID: 1731219999}
   comptoir: {fileID: 1254629738}
-  minigame2: {fileID: 0}
+  minigame2: {fileID: 1925578123}
 --- !u!4 &836199874
 Transform:
   m_ObjectHideFlags: 0
@@ -1372,12 +1314,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1002122806}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.76, y: -0.14, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.76, y: -0.1400001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 270268763}
+  m_Father: {fileID: 202522958}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1032289424
@@ -2624,6 +2566,11 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!223 &1925578123 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 4470445505903493218, guid: 57f6b5d6839d07147b509ddef22252cc, type: 3}
+  m_PrefabInstance: {fileID: 4470445505753990062}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2102251257
 GameObject:
   m_ObjectHideFlags: 0
@@ -2771,9 +2718,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 202522958}
     m_Modifications:
+    - target: {fileID: 2748358114567332986, guid: 57f6b5d6839d07147b509ddef22252cc, type: 3}
+      propertyPath: canUse
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748358114567332986, guid: 57f6b5d6839d07147b509ddef22252cc, type: 3}
+      propertyPath: spawnPoint
+      value: 
+      objectReference: {fileID: 1002122807}
     - target: {fileID: 4470445505903493222, guid: 57f6b5d6839d07147b509ddef22252cc, type: 3}
       propertyPath: m_Name
       value: MiniGame2 Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470445505903493222, guid: 57f6b5d6839d07147b509ddef22252cc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4470445505903493223, guid: 57f6b5d6839d07147b509ddef22252cc, type: 3}
       propertyPath: m_Pivot.x
@@ -2785,7 +2744,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4470445505903493223, guid: 57f6b5d6839d07147b509ddef22252cc, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4470445505903493223, guid: 57f6b5d6839d07147b509ddef22252cc, type: 3}
       propertyPath: m_AnchorMax.x

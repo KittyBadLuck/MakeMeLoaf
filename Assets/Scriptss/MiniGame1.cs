@@ -61,7 +61,7 @@ public class MiniGame1 : MonoBehaviour
     void SpawnDough()
     {
         dough = GameObject.Instantiate(doughPrefab, doughSpawn);
-        canUse = false;
+        
     }
 
     void Kneading()

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class MiniGame2 : MonoBehaviour
 {
+    public bool canUse = true;
+    public Transform spawnPoint;
+    public GameObject dough;
+    
     public 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +23,6 @@ public class MiniGame2 : MonoBehaviour
 
     public void Smash()
     {
-        Debug.Log("ça marche");
+        Debug.Log("ï¿½a marche");
     }
 }

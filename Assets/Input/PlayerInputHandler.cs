@@ -52,18 +52,26 @@ public class PlayerInputHandler : MonoBehaviour
         {
             if (context.started)
             {
-                if (_playerController.isNearMini1)
+                if (!_playerController.isLifting)
                 {
-                    if (_playerController.Lift(miniGame1.dough))
+                    if (_playerController.isNearMini1)
                     {
-                        miniGame1.dough = null;
-                        miniGame1.canUse = true;
+                        if (_playerController.Lift(miniGame1.dough))
+                        {
+                            miniGame1.dough = null;
+                            miniGame1.canUse = true;
+                        }
+                    }
+                    else
+                    {
+                        _playerController.Climb(context);
                     }
                 }
                 else
                 {
-                    _playerController.Climb(context);
+                    _playerController.Drop(this);
                 }
+                
                 
             }
             
@@ -99,6 +107,7 @@ public class PlayerInputHandler : MonoBehaviour
             Mini1Prefab.gameObject.SetActive(true);
             Mini1Prefab.worldCamera = this.gameObject.GetComponent<PlayerInput>().camera;
             miniGame1.player = this;
+            miniGame1.canUse = false;
             playing1 = true;
         }
         
