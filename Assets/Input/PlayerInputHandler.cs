@@ -10,7 +10,7 @@ public class PlayerInputHandler : MonoBehaviour
     private PlayerController _playerController;
     public MiniGame1 miniGame1;
     private Vector3 startPos = new Vector3(0, 0, 0);
-    private Camera camera;
+
 
     private void Awake()
     {
@@ -18,14 +18,23 @@ public class PlayerInputHandler : MonoBehaviour
         {
             _playerController = playerPrefab.GetComponent<PlayerController>();
             transform.parent = _playerController.transform;
-            camera = playerPrefab.GetComponentInChildren<Camera>();
-            this.GetComponent<PlayerInput>().camera = camera;
         }
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        
         _playerController.OnMove(context);
+
+            
+    }
+
+    public void OnClimb(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            _playerController.Climb(context);
+        }
     }
 
     public void LeftTrigger(InputAction.CallbackContext context)
@@ -33,5 +42,7 @@ public class PlayerInputHandler : MonoBehaviour
         miniGame1.LeftHand(context);
         Debug.Log( context.ReadValue<float>());
     }
+    
+    
     
 }
