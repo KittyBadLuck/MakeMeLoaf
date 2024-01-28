@@ -69,6 +69,20 @@ public class MiniGame2 : MonoBehaviour
             face.localScale += new Vector3(0f, 0.04f, 0f);
         }
     }
+    
+    public void RetractPeet1()
+    {
+        Debug.Log("bsr");
+    }
+    public void RetractPeet2()
+    {
+        Debug.Log("bsr");
+    }
+    public void RetractPeet3()
+    {
+        Debug.Log("bsr");
+    }
+    
 
 
 }

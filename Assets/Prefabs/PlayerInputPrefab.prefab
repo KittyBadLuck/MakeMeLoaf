@@ -146,12 +146,12 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1487631117128999194}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: North
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -160,7 +160,19 @@ MonoBehaviour:
     m_ActionId: 2ee25554-d7cc-4891-80e9-792bba5fab6a
     m_ActionName: Player/North[/DualSenseGamepadHID/buttonNorth,/Keyboard/z]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1487631117128999194}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: East
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 2c985ca1-322e-4342-8060-53af40c58c36
     m_ActionName: Player/East[/DualSenseGamepadHID/buttonEast,/Keyboard/s]
   m_NeverAutoSwitchControlSchemes: 0
@@ -189,7 +201,8 @@ MonoBehaviour:
   miniGame2: {fileID: 2748358114567332986, guid: 57f6b5d6839d07147b509ddef22252cc, type: 3}
   Mini2Prefab: {fileID: 4470445505903493218, guid: 57f6b5d6839d07147b509ddef22252cc, type: 3}
   playing2: 0
-  comptoirCanvas: {fileID: 0}
+  miniGame3: {fileID: 0}
+  comptoir: {fileID: 0}
 --- !u!1001 &4535018986684068547
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -203,15 +216,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1115801131469493209, guid: 7c1958203d84fa84a838806145ef5726, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.01374604
+      value: 0.0137460595
       objectReference: {fileID: 0}
     - target: {fileID: 1115801131469493209, guid: 7c1958203d84fa84a838806145ef5726, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0012498962
+      value: 0.0012498619
       objectReference: {fileID: 0}
     - target: {fileID: 1115801131469493209, guid: 7c1958203d84fa84a838806145ef5726, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000017182761
+      value: -0.000017182312
       objectReference: {fileID: 0}
     - target: {fileID: 5723027891599173226, guid: 7c1958203d84fa84a838806145ef5726, type: 3}
       propertyPath: m_LocalPosition.x
@@ -231,15 +244,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5723027891599173226, guid: 7c1958203d84fa84a838806145ef5726, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.01374604
+      value: 0.0137460595
       objectReference: {fileID: 0}
     - target: {fileID: 5723027891599173226, guid: 7c1958203d84fa84a838806145ef5726, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0012498962
+      value: 0.0012498619
       objectReference: {fileID: 0}
     - target: {fileID: 5723027891599173226, guid: 7c1958203d84fa84a838806145ef5726, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000017182761
+      value: -0.000017182312
       objectReference: {fileID: 0}
     - target: {fileID: 6225807809803415212, guid: 7c1958203d84fa84a838806145ef5726, type: 3}
       propertyPath: m_LocalScale.x

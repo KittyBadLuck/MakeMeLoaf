@@ -173,10 +173,10 @@ public class PlayerInputHandler : MonoBehaviour
         {
             miniGame2.RetractPeet2();
         }
-        miniGame2.Smash();
-        }
-    
     }
+    
+}
+
     
     
     
