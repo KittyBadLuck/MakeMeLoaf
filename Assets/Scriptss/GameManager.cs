@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     private PlayerInputManager playerInputManager;
     private bool playersHidden;
 
+    public GameObject passageBlock;
+
     [Header("JoinScreen")] 
     public Canvas joinScreen;
 
@@ -72,6 +74,15 @@ public class GameManager : MonoBehaviour
         else
         {
             playersHidden = false;
+        }
+
+        if (playersHidden)
+        {
+            passageBlock.SetActive(false);
+        }
+        else
+        {
+            passageBlock.SetActive(true);
         }
     }
 
