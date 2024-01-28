@@ -46,7 +46,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Climb"",
+                    ""name"": ""Lift"",
                     ""type"": ""PassThrough"",
                     ""id"": ""663bb935-2e7a-494e-9cb0-48c8f5c8f5ca"",
                     ""expectedControlType"": ""Button"",
@@ -68,6 +68,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""type"": ""PassThrough"",
                     ""id"": ""b54b660b-e18e-471d-a348-e29ab6ef4262"",
                     ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Action"",
+                    ""type"": ""Button"",
+                    ""id"": ""e03ddce4-42fe-4b5c-af5e-ef5e5f25c050"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -143,7 +152,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d4425d5c-848d-4991-aec7-938296a05a6d"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""GamePad"",
@@ -169,7 +178,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KB+M"",
-                    ""action"": ""Climb"",
+                    ""action"": ""Lift"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -180,7 +189,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""GamePad"",
-                    ""action"": ""Climb"",
+                    ""action"": ""Lift"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -227,6 +236,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""RightKnead"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dc147135-ba6a-4593-9e12-2054f6770160"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""Action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b8814ef3-d7cb-4c19-9f56-2a590eec5422"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KB+M"",
+                    ""action"": ""Action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -271,9 +302,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Join = m_Player.FindAction("Join", throwIfNotFound: true);
-        m_Player_Climb = m_Player.FindAction("Climb", throwIfNotFound: true);
+        m_Player_Lift = m_Player.FindAction("Lift", throwIfNotFound: true);
         m_Player_LeftKnead = m_Player.FindAction("LeftKnead", throwIfNotFound: true);
         m_Player_RightKnead = m_Player.FindAction("RightKnead", throwIfNotFound: true);
+        m_Player_Action = m_Player.FindAction("Action", throwIfNotFound: true);
         // MiniGame1
         m_MiniGame1 = asset.FindActionMap("MiniGame1", throwIfNotFound: true);
     }
@@ -337,18 +369,20 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Join;
-    private readonly InputAction m_Player_Climb;
+    private readonly InputAction m_Player_Lift;
     private readonly InputAction m_Player_LeftKnead;
     private readonly InputAction m_Player_RightKnead;
+    private readonly InputAction m_Player_Action;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
         public PlayerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Join => m_Wrapper.m_Player_Join;
-        public InputAction @Climb => m_Wrapper.m_Player_Climb;
+        public InputAction @Lift => m_Wrapper.m_Player_Lift;
         public InputAction @LeftKnead => m_Wrapper.m_Player_LeftKnead;
         public InputAction @RightKnead => m_Wrapper.m_Player_RightKnead;
+        public InputAction @Action => m_Wrapper.m_Player_Action;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -364,15 +398,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Join.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJoin;
                 @Join.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJoin;
                 @Join.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJoin;
-                @Climb.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnClimb;
-                @Climb.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnClimb;
-                @Climb.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnClimb;
+                @Lift.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLift;
+                @Lift.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLift;
+                @Lift.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLift;
                 @LeftKnead.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftKnead;
                 @LeftKnead.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftKnead;
                 @LeftKnead.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftKnead;
                 @RightKnead.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightKnead;
                 @RightKnead.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightKnead;
                 @RightKnead.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightKnead;
+                @Action.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAction;
+                @Action.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAction;
+                @Action.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAction;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -383,15 +420,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Join.started += instance.OnJoin;
                 @Join.performed += instance.OnJoin;
                 @Join.canceled += instance.OnJoin;
-                @Climb.started += instance.OnClimb;
-                @Climb.performed += instance.OnClimb;
-                @Climb.canceled += instance.OnClimb;
+                @Lift.started += instance.OnLift;
+                @Lift.performed += instance.OnLift;
+                @Lift.canceled += instance.OnLift;
                 @LeftKnead.started += instance.OnLeftKnead;
                 @LeftKnead.performed += instance.OnLeftKnead;
                 @LeftKnead.canceled += instance.OnLeftKnead;
                 @RightKnead.started += instance.OnRightKnead;
                 @RightKnead.performed += instance.OnRightKnead;
                 @RightKnead.canceled += instance.OnRightKnead;
+                @Action.started += instance.OnAction;
+                @Action.performed += instance.OnAction;
+                @Action.canceled += instance.OnAction;
             }
         }
     }
@@ -443,9 +483,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnJoin(InputAction.CallbackContext context);
-        void OnClimb(InputAction.CallbackContext context);
+        void OnLift(InputAction.CallbackContext context);
         void OnLeftKnead(InputAction.CallbackContext context);
         void OnRightKnead(InputAction.CallbackContext context);
+        void OnAction(InputAction.CallbackContext context);
     }
     public interface IMiniGame1Actions
     {

@@ -9,12 +9,15 @@ public class PlayerInputHandler : MonoBehaviour
 {
     public GameObject playerPrefab;
     private PlayerController _playerController;
+    
+    [Header("Minigame")]
     public MiniGame1 miniGame1;
-    private Vector3 startPos = new Vector3(0, 0, 0);
-    public float test;
     public Canvas sliderPref;
     public Slider slider;
     public Slider slider2;
+    
+    [Header("Comptoire")]
+    public Canvas comptoirCanvas;
 
 
     private void Awake()
@@ -33,7 +36,6 @@ public class PlayerInputHandler : MonoBehaviour
     {
         _playerController.OnMove(context);
 
-            
     }
 
     public void OnClimb(InputAction.CallbackContext context)
@@ -53,6 +55,12 @@ public class PlayerInputHandler : MonoBehaviour
     public void RightKnead(InputAction.CallbackContext context)
     {
         slider2.value = context.ReadValue<float>();
+    }
+
+    public void Interaction(InputAction.CallbackContext context)
+    {
+        comptoirCanvas.gameObject.SetActive(true);
+        
     }
     
     
