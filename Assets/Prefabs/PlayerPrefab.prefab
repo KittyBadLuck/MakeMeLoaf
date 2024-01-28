@@ -141,7 +141,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2872797130435073863}
-  m_LocalRotation: {x: 0.0137460595, y: 0.0012498962, z: -0.000017182787, w: 0.99990475}
+  m_LocalRotation: {x: 0.01374604, y: 0.0012498619, z: -0.000017182289, w: 0.99990475}
   m_LocalPosition: {x: -0.01, y: 0.11, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -272,7 +272,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.3448019, y: -0.87767696}
+  m_Offset: {x: 0.3003416, y: -1.0999804}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -283,7 +283,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 8.4602585, y: 16.923578}
+  m_Size: {x: 6.770753, y: 12.032906}
   m_EdgeRadius: 0
 --- !u!212 &2948379783064200539
 SpriteRenderer:
@@ -393,12 +393,15 @@ MonoBehaviour:
   climbMoveLimit: 0.5
   isNearCounter: 0
   isNearMini1: 0
+  isNearMini2: 0
+  isNearMini3: 0
   camera: {fileID: 8083393410959419415}
   renderer: {fileID: 2948379783064200539}
   move: {x: 0, y: 0}
   isNearPlayer: 0
   climbablePlayer: []
   isLifting: 0
+  liftedObject: {fileID: 0}
 --- !u!50 &8479042976767294462
 Rigidbody2D:
   serializedVersion: 4
@@ -516,7 +519,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7041171217326286304}
-  m_LocalRotation: {x: 0.0137460595, y: 0.0012498962, z: -0.000017182787, w: 0.99990475}
+  m_LocalRotation: {x: 0.01374604, y: 0.0012498619, z: -0.000017182289, w: 0.99990475}
   m_LocalPosition: {x: -0.01, y: 0.11, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
 
     public bool isNearMini1;
     public bool isNearMini2;
+    public bool isNearMini3;
     
     [Header("Ref")]
     public Camera camera;
@@ -196,7 +197,7 @@ public class PlayerController : MonoBehaviour
         move = new Vector2(movement.x, movement.y);
     }
 
-    public void Climb(InputAction.CallbackContext context)
+    public void Climb()
     {
         if (isLifted)
         {
@@ -204,27 +205,38 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if ( !isLifting) 
+            if (isNearPlayer && climbablePlayer.Count > 0)
             {
-                if (isNearPlayer && climbablePlayer.Count > 0)
-                {
-                    GameObject closest = GetClosestPlayer(climbablePlayer);
+                Debug.Log("TryClimb");
+                GameObject closest = GetClosestPlayer(climbablePlayer);
+                PlayerController closestController = closest.GetComponent<PlayerController>();
 
-                    if (closest)
+                if (closest && closestController.isLifting)
+                {
+                    Debug.Log("TryLiftPlayer " + !closestController.liftedObject.CompareTag("Player"));
+                    if (!closestController.liftedObject.CompareTag("Player"))
                     {
-                        closest.GetComponent<PlayerController>().isLifting = true;
-                        renderer.sortingOrder += closest.GetComponent<PlayerController>().renderer.sortingOrder + 1;
-                        Transform t = this.transform;
-                        Transform climbT = closest.transform;
-                        transform.position = climbT.position + new Vector3(0, yClimbOffset, 0);
-                        playerClimbed = closest;
-                        playerClimbed.GetComponent<PlayerController>().liftedObject = this.gameObject;
-                        isLifted = true;
+                        isLifting = true;
+                        closestController.isLifted = true;
+                        closestController.renderer.sortingOrder += closest.GetComponent<PlayerController>().renderer.sortingOrder + 1;
+                        closest.transform.position = transform.position + new Vector3(0, yClimbOffset, 0);
+                        closestController.playerClimbed = this.gameObject;
+                        liftedObject = closest;
                     }
                 }
-               
-                
+                else if (closest)
+                {
+                    closest.GetComponent<PlayerController>().isLifting = true;
+                    renderer.sortingOrder += closest.GetComponent<PlayerController>().renderer.sortingOrder + 1;
+                    Transform t = this.transform;
+                    Transform climbT = closest.transform;
+                    transform.position = climbT.position + new Vector3(0, yClimbOffset, 0);
+                    playerClimbed = closest;
+                    playerClimbed.GetComponent<PlayerController>().liftedObject = this.gameObject;
+                    isLifted = true;
+                }
             }
+
         }
 
     }
@@ -247,7 +259,7 @@ public class PlayerController : MonoBehaviour
         {
             Transform t = player.transform;
             float dist = Vector3.Distance(t.position, currentPos);
-            if (dist < minDist && player.GetComponent<PlayerController>().isLifting == false)
+            if (dist < minDist)
             {
                 pMin = player;
                 minDist = dist;
@@ -277,6 +289,10 @@ public class PlayerController : MonoBehaviour
         {
             isNearMini2 = true;
         }
+        if (other.CompareTag("MiniGame3"))
+        {
+            isNearMini3 = true;
+        }
     }
     
 
@@ -298,6 +314,11 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("MiniGame2"))
         {
             isNearMini2 = false;
+        }
+        
+        if (other.CompareTag("MiniGame3"))
+        {
+            isNearMini3 = false;
         }
     }
 }

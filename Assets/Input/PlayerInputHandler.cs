@@ -19,6 +19,7 @@ public class PlayerInputHandler : MonoBehaviour
     public MiniGame2 miniGame2;
     public Canvas Mini2Prefab;
     public bool playing2;
+    public MiniGame3 miniGame3;
     
     [Header("Comptoire")]
     public Canvas comptoirCanvas;
@@ -56,7 +57,6 @@ public class PlayerInputHandler : MonoBehaviour
                 {
                     if (_playerController.isNearMini1)
                     {
-
                         if (miniGame1.dough != null)
                         {
                             _playerController.Lift(miniGame1.dough);
@@ -66,7 +66,8 @@ public class PlayerInputHandler : MonoBehaviour
                     }
                     else
                     {
-                        _playerController.Climb(context);
+                        Debug.Log("tryClimb");
+                        _playerController.Climb();
                     }
                 }
                 else
@@ -111,6 +112,11 @@ public class PlayerInputHandler : MonoBehaviour
             miniGame1.player = this;
             miniGame1.canUse = false;
             playing1 = true;
+        }
+
+        if (_playerController.isNearMini3)
+        {
+            miniGame3.Bake();
         }
         
 
