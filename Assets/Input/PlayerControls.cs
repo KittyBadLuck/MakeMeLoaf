@@ -35,6 +35,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""LeftKnead"",
+                    ""type"": ""Value"",
+                    ""id"": ""db68cb5c-a165-4602-a75e-9a1bcde14ad3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -103,8 +112,25 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e994a06c-77d7-4077-a288-7170e1791c55"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""LeftKnead"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""MiniGame1"",
+            ""id"": ""9ed25706-c80a-462a-a8b8-2299c67c0a54"",
+            ""actions"": [],
+            ""bindings"": []
         }
     ],
     ""controlSchemes"": [
@@ -140,6 +166,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
+        m_Player_LeftKnead = m_Player.FindAction("LeftKnead", throwIfNotFound: true);
+        // MiniGame1
+        m_MiniGame1 = asset.FindActionMap("MiniGame1", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -200,11 +229,13 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Movement;
+    private readonly InputAction m_Player_LeftKnead;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
         public PlayerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
+        public InputAction @LeftKnead => m_Wrapper.m_Player_LeftKnead;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -217,6 +248,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Movement.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                 @Movement.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                 @Movement.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
+                @LeftKnead.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftKnead;
+                @LeftKnead.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftKnead;
+                @LeftKnead.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftKnead;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -224,10 +258,38 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
+                @LeftKnead.started += instance.OnLeftKnead;
+                @LeftKnead.performed += instance.OnLeftKnead;
+                @LeftKnead.canceled += instance.OnLeftKnead;
             }
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // MiniGame1
+    private readonly InputActionMap m_MiniGame1;
+    private IMiniGame1Actions m_MiniGame1ActionsCallbackInterface;
+    public struct MiniGame1Actions
+    {
+        private @PlayerControls m_Wrapper;
+        public MiniGame1Actions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputActionMap Get() { return m_Wrapper.m_MiniGame1; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MiniGame1Actions set) { return set.Get(); }
+        public void SetCallbacks(IMiniGame1Actions instance)
+        {
+            if (m_Wrapper.m_MiniGame1ActionsCallbackInterface != null)
+            {
+            }
+            m_Wrapper.m_MiniGame1ActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+            }
+        }
+    }
+    public MiniGame1Actions @MiniGame1 => new MiniGame1Actions(this);
     private int m_KBMSchemeIndex = -1;
     public InputControlScheme KBMScheme
     {
@@ -249,5 +311,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
+        void OnLeftKnead(InputAction.CallbackContext context);
+    }
+    public interface IMiniGame1Actions
+    {
     }
 }

@@ -8,6 +8,7 @@ public class PlayerInputHandler : MonoBehaviour
 {
     public GameObject playerPrefab;
     private PlayerController _playerController;
+    public MiniGame1 miniGame1;
     private Vector3 startPos = new Vector3(0, 0, 0);
     private Camera camera;
 
@@ -15,8 +16,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (playerPrefab != null)
         {
-            _playerController = GameObject.Instantiate(playerPrefab, startPos, transform.rotation)
-                .GetComponent<PlayerController>();
+            _playerController = playerPrefab.GetComponent<PlayerController>();
             transform.parent = _playerController.transform;
             camera = playerPrefab.GetComponentInChildren<Camera>();
             this.GetComponent<PlayerInput>().camera = camera;
@@ -26,6 +26,12 @@ public class PlayerInputHandler : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         _playerController.OnMove(context);
+    }
+
+    public void LeftTrigger(InputAction.CallbackContext context)
+    {
+        miniGame1.LeftHand(context);
+        Debug.Log( context.ReadValue<float>());
     }
     
 }

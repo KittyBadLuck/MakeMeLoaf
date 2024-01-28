@@ -13,6 +13,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "LeftKnead",
+                    "type": "Value",
+                    "id": "db68cb5c-a165-4602-a75e-9a1bcde14ad3",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -81,8 +90,25 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e994a06c-77d7-4077-a288-7170e1791c55",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GamePad",
+                    "action": "LeftKnead",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "MiniGame1",
+            "id": "9ed25706-c80a-462a-a8b8-2299c67c0a54",
+            "actions": [],
+            "bindings": []
         }
     ],
     "controlSchemes": [
