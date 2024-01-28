@@ -141,7 +141,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2872797130435073863}
-  m_LocalRotation: {x: 0.0137460595, y: 0.0012498962, z: -0.000017182787, w: 0.99990475}
+  m_LocalRotation: {x: 0.01374604, y: 0.0012498619, z: -0.000017182289, w: 0.99990475}
   m_LocalPosition: {x: -0.01, y: 0.11, z: -4}
   m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1}
   m_ConstrainProportionsScale: 0
@@ -399,8 +399,8 @@ MonoBehaviour:
   isNearMini3: 0
   camera: {fileID: 8083393410959419415}
   renderer: {fileID: 2948379783064200539}
-  hat: {fileID: 0}
-  hatRenderer: {fileID: 0}
+  hat: {fileID: 8823140337497769986}
+  hatRenderer: {fileID: 8440623453060804977}
   move: {x: 0, y: 0}
   isNearPlayer: 0
   climbablePlayer: []
@@ -525,7 +525,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7041171217326286304}
-  m_LocalRotation: {x: 0.0137460595, y: 0.0012498962, z: -0.000017182787, w: 0.99990475}
+  m_LocalRotation: {x: 0.01374604, y: 0.0012498619, z: -0.000017182289, w: 0.99990475}
   m_LocalPosition: {x: -0.01, y: 0.11, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -588,7 +588,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1783527033238772691
 Transform:
   m_ObjectHideFlags: 0
