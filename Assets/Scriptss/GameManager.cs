@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using Unity.VisualScripting;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +11,7 @@ public class GameManager : MonoBehaviour
     public List<PlayerInput> players;
     public List<LayerMask> playerLayers;
     public List<Transform> startingPoints;
+    public List<AnimatorController> playerAnimators;
     private int playerCount = 0;
     public int playerMax = 4;
     private PlayerInputManager playerInputManager;
@@ -16,20 +19,9 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         playerInputManager = FindObjectOfType<PlayerInputManager>();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
         
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     public void AddPlayer(PlayerInput player)
     {
         players.Add(player);
@@ -45,6 +37,7 @@ public class GameManager : MonoBehaviour
         playerParent.GetComponentInChildren<CinemachineVirtualCamera>().gameObject.layer = layerToAdd;
         //add the layer
         playerParent.GetComponentInChildren<Camera>().cullingMask |= 1 << layerToAdd;
+        playerParent.GetComponentInChildren<Animator>().runtimeAnimatorController = playerAnimators[players.Count - 1];
 
     }
 }

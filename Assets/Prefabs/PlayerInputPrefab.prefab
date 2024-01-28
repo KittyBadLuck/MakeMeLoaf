@@ -95,6 +95,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 663bb935-2e7a-494e-9cb0-48c8f5c8f5ca
     m_ActionName: Player/Climb[/Keyboard/e,/DualSenseGamepadHID/buttonWest]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1487631117128999194}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: Test
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6b4432d3-99e7-4120-aedc-1815fbbb3ff6
+    m_ActionName: Player/Test[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -113,6 +129,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 7532583232182958067}
+  test: 0
+  sliderPref: {fileID: 7620756251798889396, guid: 62bec7cf8051aa5469328e1ce110d672, type: 3}
+  slider: {fileID: 0}
 --- !u!1001 &4535018986684068547
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -130,11 +149,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1115801131469493209, guid: 7c1958203d84fa84a838806145ef5726, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00040693636
+      value: 0.0004069365
       objectReference: {fileID: 0}
     - target: {fileID: 1115801131469493209, guid: 7c1958203d84fa84a838806145ef5726, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000008232885
+      value: -0.000008232889
       objectReference: {fileID: 0}
     - target: {fileID: 5723027891599173226, guid: 7c1958203d84fa84a838806145ef5726, type: 3}
       propertyPath: m_LocalPosition.x
@@ -154,11 +173,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5723027891599173226, guid: 7c1958203d84fa84a838806145ef5726, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00040693636
+      value: 0.0004069365
       objectReference: {fileID: 0}
     - target: {fileID: 5723027891599173226, guid: 7c1958203d84fa84a838806145ef5726, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000008232885
+      value: -0.000008232889
       objectReference: {fileID: 0}
     - target: {fileID: 6225807809803415212, guid: 7c1958203d84fa84a838806145ef5726, type: 3}
       propertyPath: m_LocalPosition.y

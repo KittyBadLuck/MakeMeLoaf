@@ -3,12 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerInputHandler : MonoBehaviour
 {
     public GameObject playerPrefab;
     private PlayerController _playerController;
     private Vector3 startPos = new Vector3(0, 0, 0);
+    public float test;
+    public Canvas sliderPref;
+    public Slider slider;
 
 
     private void Awake()
@@ -19,6 +23,8 @@ public class PlayerInputHandler : MonoBehaviour
                 .GetComponent<PlayerController>();
             transform.parent = _playerController.transform;
         }
+
+        slider = GameObject.Instantiate(sliderPref).GetComponentInChildren<Slider>();
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -34,6 +40,11 @@ public class PlayerInputHandler : MonoBehaviour
         {
             _playerController.Climb(context);
         }
+    }
+
+    public void Test(InputAction.CallbackContext context)
+    {
+        slider.value = context.ReadValue<float>();
     }
     
     

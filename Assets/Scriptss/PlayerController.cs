@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     public Camera camera;
     private Rigidbody2D _rigidbody2D;
     public SpriteRenderer renderer;
-    private Vector2 move;
+    public Vector2 move;
     private Animator _animator;
     
     public bool isNearPlayer;
@@ -35,17 +35,44 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        
+        if (isLifted)
+        {
+            transform.position = playerClimbed.transform.position + new Vector3(0,yClimbOffset,0 );
+        }
+
+        if (isLifting)
+        {
+            _rigidbody2D.velocity = move * (playerSpeed/2);
+        }
+        else if(!isLifted)
+        {
+            _rigidbody2D.velocity = move * playerSpeed;
+        }
 
         if (move != Vector2.zero)
         {
-            //gameObject.transform.right = Vector2.Lerp(transform.right, move, 0.1f);
-            if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("CatWalk1"))
+            if (!isLifted)
             {
-                print("call animation");
-                _animator.Play("CatWalk1");
+                if (move.y >= 0)
+                {
+                    if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("CatWalkSide"))
+                    {
+                        _animator.Play("CatWalkSide");
+                    }
+                }
+                else
+                { 
+                    if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("CatWalkDown"))
+                    {
+                        _animator.Play("CatWalkDown");
+                    }
+                
+                }
             }
+            
 
-            if (move.x > 0)
+            if (move.x >= 0)
             {
                 renderer.flipX = true;
             }
@@ -57,32 +84,14 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("CatIdle1"))
+            if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("CatIdle"))
             {
-                _animator.Play("CatIdle1");
+                _animator.Play("CatIdle");
             }
            
         }
 
-        if (isLifted)
-        {
-            
-            Vector3 diff = new Vector2(playerClimbed.transform.position.x, playerClimbed.transform.position.y) -
-                           new Vector2(transform.position.x, transform.position.y - yClimbOffset);
-            if (diff.magnitude > climbMoveLimit)
-            {
-                Fall();
-            }
-        }
 
-        if (isLifted || isLifting)
-        {
-            _rigidbody2D.velocity = move * (playerSpeed/2);
-        }
-        else
-        {
-            _rigidbody2D.velocity = move * playerSpeed;
-        }
         
     }
 
