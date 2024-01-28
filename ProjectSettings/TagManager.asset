@@ -7,6 +7,7 @@ TagManager:
   - MiniGame1
   - MiniGame2
   - MiniGame3
+  - Counter
   layers:
   - Default
   - TransparentFX

@@ -291,6 +291,10 @@ public class PlayerController : MonoBehaviour
         {
             isNearMini3 = true;
         }
+        if (other.CompareTag("Counter"))
+        {
+            isNearCounter = true;
+        }
     }
     
 
@@ -317,6 +321,10 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("MiniGame3"))
         {
             isNearMini3 = false;
+        }
+        if (other.CompareTag("Counter"))
+        {
+            isNearCounter = false;
         }
     }
 }
