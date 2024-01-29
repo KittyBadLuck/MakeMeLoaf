@@ -22,9 +22,38 @@ public class Comptoir : MonoBehaviour
     public LiftedHandler breadCarried;
     public PlayerController playerController;
 
+    private bool waitingforCustomer;
+    private float targetTime;
+    public float customerTime = 20f;
+
     private void OnEnable()
     {
         _eventSystem = EventSystem.current;
+    }
+
+    private void Start()
+    {
+        targetTime = customerTime;
+    }
+
+    private void Update()
+    {
+        if (waitingforCustomer)
+        {
+            targetTime -= Time.deltaTime;
+
+            if (targetTime <= 0.0f)
+            {
+               NewCustomer();
+            }
+        }
+    }
+
+    private void NewCustomer()
+    {
+        waitingforCustomer = false;
+        OrderingCustomer.SetActive(true);
+        targetTime = customerTime;
     }
 
     public void Open()
@@ -61,6 +90,7 @@ public class Comptoir : MonoBehaviour
             customerOrder.GetComponent<Image>().sprite = OrderingCustomer.GetComponent<Image>().sprite;
             customerOrder.SetActive(true);
             OrderingCustomer.SetActive(false);
+            waitingforCustomer = true;
             hub.AddOrder();
         }
         _eventSystem.SetSelectedGameObject(selectedDefault);

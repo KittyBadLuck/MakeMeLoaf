@@ -242,7 +242,7 @@ public class PlayerController : MonoBehaviour
 
     public void Climb()
     {
-        if (isLifted)
+        if (isLifted && !inCounterZone)
         {
             Fall();
         }
