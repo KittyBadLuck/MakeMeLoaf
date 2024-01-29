@@ -10,7 +10,7 @@ public class MiniGame2 : MonoBehaviour
     public Sprite doughReadySprite;
     public PlayerInputHandler player;
 
-    private List<int> peetNumber = new List<int>();
+    public List<int> peetNumber = new List<int>();
 
     public GameObject dough;
     private Animation doughAnimation;
@@ -80,6 +80,9 @@ public class MiniGame2 : MonoBehaviour
         slapNumber = 0;
         peets.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         face.localScale = new Vector3(1f, 0f, 1f);
+        peet1.localScale = new Vector3(1f, 1f, 1f);
+        peet2.localScale = new Vector3(1f, 1f, 1f);
+        peet3.localScale = new Vector3(1f, 1f, 1f);
         peetNumber[0] = 0;
         peetNumber[1] = 0;
         peetNumber[2] = 0;

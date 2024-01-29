@@ -101,7 +101,7 @@ public class MiniGame1 : MonoBehaviour
             doughSprite.sprite = secondDough;
         }
 
-        if(kneadNumber == 40)
+        if(kneadNumber >= 40)
         {
             doughSprite.sprite = finalDough;
             isGameDone = true;
