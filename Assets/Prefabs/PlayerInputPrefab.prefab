@@ -193,6 +193,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 7532583232182958067}
+  _playerController: {fileID: 0}
+  disguise: {fileID: 0}
   miniGame1: {fileID: 0}
   Mini1Prefab: {fileID: 0}
   slider: {fileID: 0}
@@ -350,6 +352,14 @@ PrefabInstance:
       propertyPath: m_CullingMask.m_Bits
       value: 1079
       objectReference: {fileID: 0}
+    - target: {fileID: 8440623453060804977, guid: 7c1958203d84fa84a838806145ef5726, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8823140337497769986, guid: 7c1958203d84fa84a838806145ef5726, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c1958203d84fa84a838806145ef5726, type: 3}
 --- !u!20 &5675209287929731796 stripped
@@ -380,7 +390,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.063938975, y: -0.017437935}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -391,7 +401,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5, y: 5}
+  m_Size: {x: 1.5240576, y: 1.7565622}
   m_EdgeRadius: 0
 --- !u!95 &773254528936201709
 Animator:

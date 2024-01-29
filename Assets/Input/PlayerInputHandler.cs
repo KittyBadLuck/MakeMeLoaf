@@ -51,6 +51,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnClimb(InputAction.CallbackContext context)
     {
+        bool acted = false;
         if (context.performed)
         {
             if (!playing1 && !playing2 && !_playerController.inCounterZone)
@@ -64,29 +65,36 @@ public class PlayerInputHandler : MonoBehaviour
                             _playerController.Lift(miniGame1.dough);
                             miniGame1.dough = null;
                             miniGame1.canUse = true;
+                            acted = true;
                         }
                     }
-                    else if (_playerController.isNearMini2)
+                    
+                    if (_playerController.isNearMini2 && acted == false)
                     {
                         if (miniGame2.doughWorld != null)
                         {
                             _playerController.Lift(miniGame2.doughWorld);
                             miniGame2.doughWorld = null;
                             miniGame2.canUse = true;
+                            acted = true;
                         }
                     }
-                    else if (_playerController.isNearMini3)
+                    
+                    if (_playerController.isNearMini3 && acted == false)
                     {
                         if (miniGame3.bakedDough != null)
                         {
                             _playerController.Lift(miniGame3.bakedDough);
                             miniGame3.bakedDough.SetActive(true);
                             miniGame3.GetDough();
+                            acted = true;
                         }
                     }
-                    else
+                    
+                    if(acted == false)
                     {
                         _playerController.Climb();
+                        acted = true;
                     }
                 }
                 else

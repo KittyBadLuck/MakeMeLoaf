@@ -172,11 +172,7 @@ public class PlayerController : MonoBehaviour
         isLifted = false;
         playerClimbed.GetComponent<PlayerController>().isLifting = false;
         transform.position = playerClimbed.transform.position + new Vector3(move.x, move.y , 0)* fallDistance;
-
-        if (isLifting)
-        {
-            print("Make Lifted player fall too");
-        }
+        renderer.sortingOrder -= 1;
     }
 
     public void Drop(PlayerInputHandler inputHandler)
@@ -354,11 +350,8 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            isNearPlayer = false;
             climbablePlayer.Remove(other.gameObject);
-            if (climbablePlayer.Count == 0 && climbablePlayer.Contains(other.gameObject))
-            {
-                isNearPlayer = false;
-            }
         }
         if (other.CompareTag("MiniGame1"))
         {
