@@ -4184,13 +4184,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1734887698}
     m_Modifications:
+    - target: {fileID: 1380344558292279961, guid: 3be349c217cf87d4cb4186d372452f6f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7927987180897123012, guid: 3be349c217cf87d4cb4186d372452f6f, type: 3}
       propertyPath: m_Name
       value: Comptoir
       objectReference: {fileID: 0}
     - target: {fileID: 7927987180897123012, guid: 3be349c217cf87d4cb4186d372452f6f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7927987180897123013, guid: 3be349c217cf87d4cb4186d372452f6f, type: 3}
       propertyPath: m_RootOrder

@@ -169,14 +169,18 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        if(liftedHandler.isBaked == true)
+        if (liftedHandler)
         {
-            isBaked = true;
+            if(liftedHandler.isBaked == true)
+            {
+                isBaked = true;
+            }
+            else
+            {
+                isBaked = false;
+            }
         }
-        else
-        {
-            isBaked = false;
-        }
+        
 
     }
 
