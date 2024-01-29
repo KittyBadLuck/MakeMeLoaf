@@ -40,8 +40,6 @@ public class PlayerController : MonoBehaviour
     public GameObject liftedObject;
     public bool isLifted;
     public GameObject playerClimbed;
-    public LiftedHandler liftedHandler;
-    public bool isBaked;
 
     private void Awake()
     {
@@ -165,17 +163,6 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        if (liftedHandler)
-        {
-            if(liftedHandler.isBaked == true)
-            {
-                isBaked = true;
-            }
-            else
-            {
-                isBaked = false;
-            }
-        }
 
     }
 
@@ -209,24 +196,20 @@ public class PlayerController : MonoBehaviour
             }
             else if (isNearMini2 && inputHandler.miniGame2.doughWorld == null)
             {
-                if (liftHandler.isKneadedDough)
+                if (liftHandler.isKneadedDough || liftHandler.isReadyToBake)
                 {
-                    inputHandler.miniGame2.canUse = true;
+                    if (liftHandler.isKneadedDough) {inputHandler.miniGame2.canUse = true;}
+                    else {inputHandler.miniGame2.canUse = false;}
                     inputHandler.miniGame2.doughWorld = liftHandler.gameObject;
                     liftHandler.gameObject.transform.position = inputHandler.miniGame2.spawnPoint.position;
+                    liftHandler.isLifted = false;
+                    liftHandler.liftingPlayer = null;
+                    isLifting = false;
+                    liftedObject = null;
                 }
-                else if (liftHandler.isReadyToBake)
-                {
-                    inputHandler.miniGame2.canUse = false;
-                    inputHandler.miniGame2.doughWorld = liftHandler.gameObject;
-                    liftHandler.gameObject.transform.position = inputHandler.miniGame2.spawnPoint.position;
+              
 
-                }
 
-                liftHandler.isLifted = false;
-                liftHandler.liftingPlayer = null;
-                isLifting = false;
-                liftedObject = null;
             }
             else if (isNearMini3 && inputHandler.miniGame3.canUse)
             {
@@ -303,7 +286,6 @@ public class PlayerController : MonoBehaviour
         dough.GetComponent<LiftedHandler>().isLifted = true;
         isLifting = true;
         liftedObject = dough;
-        liftedHandler = liftedObject.GetComponent<LiftedHandler>();
     }
  
     GameObject GetClosestPlayer(List<GameObject> players)
