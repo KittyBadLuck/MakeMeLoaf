@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     private PlayerInputManager playerInputManager;
     private bool playersHidden;
 
+    public PauseMenu pause;
+
     [Header("Disguise")]
     public GameObject passageBlock;
 
@@ -125,6 +127,7 @@ public class GameManager : MonoBehaviour
         playerParent.GetComponent<PlayerInputHandler>().Mini2Prefab = minigame2;
         playerParent.GetComponent<PlayerInputHandler>().miniGame3 = minigame3;
         playerParent.GetComponent<PlayerInputHandler>().comptoir = comptoir;
+        playerParent.GetComponent<PlayerInputHandler>().pause = pause;
         playerParent.GetComponent<PlayerInputHandler>().disguise = disguiseManager;
         playerParent.GetComponentInChildren<Animator>().runtimeAnimatorController = playerAnimators[players.Count - 1];
 

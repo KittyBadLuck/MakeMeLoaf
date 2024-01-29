@@ -98,6 +98,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""41e6108d-2e59-43c9-a393-aa8185bd31a4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -320,6 +329,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""East"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""66e817f2-fdec-463c-931f-36072f08612b"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7f353909-d127-4e6a-9a88-0987c29b3e27"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KB+M"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -370,6 +401,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_Action = m_Player.FindAction("Action", throwIfNotFound: true);
         m_Player_North = m_Player.FindAction("North", throwIfNotFound: true);
         m_Player_East = m_Player.FindAction("East", throwIfNotFound: true);
+        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         // MiniGame1
         m_MiniGame1 = asset.FindActionMap("MiniGame1", throwIfNotFound: true);
     }
@@ -439,6 +471,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Action;
     private readonly InputAction m_Player_North;
     private readonly InputAction m_Player_East;
+    private readonly InputAction m_Player_Pause;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -451,6 +484,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Action => m_Wrapper.m_Player_Action;
         public InputAction @North => m_Wrapper.m_Player_North;
         public InputAction @East => m_Wrapper.m_Player_East;
+        public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -484,6 +518,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @East.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEast;
                 @East.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEast;
                 @East.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEast;
+                @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -512,6 +549,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @East.started += instance.OnEast;
                 @East.performed += instance.OnEast;
                 @East.canceled += instance.OnEast;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -569,6 +609,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnAction(InputAction.CallbackContext context);
         void OnNorth(InputAction.CallbackContext context);
         void OnEast(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IMiniGame1Actions
     {

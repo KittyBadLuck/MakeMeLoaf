@@ -28,6 +28,8 @@ public class PlayerInputHandler : MonoBehaviour
     [Header("Comptoire")]
     public Comptoir comptoir;
 
+    public PauseMenu pause;
+
 
     private void Awake()
     {
@@ -41,6 +43,19 @@ public class PlayerInputHandler : MonoBehaviour
         slider2 = Mini1Prefab.GetComponentsInChildren<Slider>()[1];
         miniGame1 = Mini1Prefab.gameObject.GetComponent<MiniGame1>();
         miniGame2 = Mini2Prefab.gameObject.GetComponent<MiniGame2>();
+    }
+
+    public void Pause()
+    {
+        if (!pause.isOpen)
+        {
+            pause.gameObject.SetActive(true);
+            pause.Open();
+        }
+        else
+        {
+            pause.Close();
+        }
     }
 
     public void OnMove(InputAction.CallbackContext context)
