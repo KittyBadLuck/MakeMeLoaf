@@ -81,7 +81,7 @@ public class Comptoir : MonoBehaviour
             customer.SetActive(false);
             playerController.liftedObject = null;
             playerController.isLifting = false;
-            Destroy(playerController.liftedObject);
+            Destroy(liftedObject);
 
             hub.score += 10;
         }

@@ -22,6 +22,10 @@ public class GameManager : MonoBehaviour
     private bool playersHidden;
 
     public PauseMenu pause;
+    public End end;
+    public HUDCount hud;
+
+    public float timer = 120f;
 
     [Header("Disguise")]
     public GameObject passageBlock;
@@ -71,10 +75,29 @@ public class GameManager : MonoBehaviour
             {
                 passageBlock.SetActive(true);
             }
+
+            var ts = TimeSpan.FromSeconds(timer);
+            
+            hud.timer.text = string.Format("{0:00}:{1:00}", ts.Minutes, ts.Seconds);
+
+            timer -= Time.deltaTime;
+            
+            if (timer <= 0.0f)
+            {
+                Finish();
+            }
         }
         
         
 
+    }
+
+    private void Finish()
+    {
+        end.gameObject.SetActive(true);
+        end.Open(hud.score);
+
+        playerSelected = false;
     }
 
     private void CheckHidden()

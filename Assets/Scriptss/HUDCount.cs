@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class HUDCount : MonoBehaviour
 {
     private int currentCount = 0;
     public int score;
+    public TextMeshProUGUI timer;
     public GameObject[] orders;
 
     public void AddOrder()
