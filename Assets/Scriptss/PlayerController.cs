@@ -192,6 +192,11 @@ public class PlayerController : MonoBehaviour
                     inputHandler.miniGame1.canUse = false;
                     inputHandler.miniGame1.dough = liftHandler.gameObject;
                     liftHandler.gameObject.transform.position = inputHandler.miniGame1.doughSpawn.position;
+                    liftHandler.isLifted = false;
+                    liftHandler.liftingPlayer = null;
+                    isLifting = false;
+                    liftedObject = null;
+                    
                 }
             }
             else if (isNearMini2 && inputHandler.miniGame2.doughWorld == null)
@@ -207,8 +212,6 @@ public class PlayerController : MonoBehaviour
                     isLifting = false;
                     liftedObject = null;
                 }
-              
-
 
             }
             else if (isNearMini3 && inputHandler.miniGame3.canUse)

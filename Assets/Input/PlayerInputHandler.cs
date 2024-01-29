@@ -171,29 +171,33 @@ public class PlayerInputHandler : MonoBehaviour
                 }
             }
 
-            if (_playerController.isNearMini1 && miniGame1.canUse)
+            if (!_playerController.isLifting)
             {
-                Mini1Prefab.gameObject.SetActive(true);
-                Mini1Prefab.worldCamera = this.gameObject.GetComponent<PlayerInput>().camera;
-                miniGame1.player = this;
-                miniGame1.canUse = false;
-                _playerController.move = new Vector2(0, 0);
-                playing1 = true;
+                if (_playerController.isNearMini1 && miniGame1.canUse)
+                {
+                    Mini1Prefab.gameObject.SetActive(true);
+                    Mini1Prefab.worldCamera = this.gameObject.GetComponent<PlayerInput>().camera;
+                    miniGame1.player = this;
+                    miniGame1.canUse = false;
+                    _playerController.move = new Vector2(0, 0);
+                    playing1 = true;
+                }
+
+                if (_playerController.isNearMini2 && miniGame2.canUse)
+                {
+                    if (miniGame2.doughWorld)
+                    {
+                        _playerController.move = new Vector2(0, 0);
+                        Mini2Prefab.gameObject.SetActive(true);
+                        miniGame2.player = this;
+                        Mini2Prefab.worldCamera = this.gameObject.GetComponent<PlayerInput>().camera;
+                        playing2 = true;
+                        miniGame2.canUse = false;
+                    }
+              
+                }
             }
 
-            if (_playerController.isNearMini2 && miniGame2.canUse)
-            {
-                if (miniGame2.doughWorld)
-                {
-                    _playerController.move = new Vector2(0, 0);
-                    Mini2Prefab.gameObject.SetActive(true);
-                    miniGame2.player = this;
-                    Mini2Prefab.worldCamera = this.gameObject.GetComponent<PlayerInput>().camera;
-                    playing2 = true;
-                    miniGame2.canUse = false;
-                }
-              
-            }
             if (playing2)
             {
                 miniGame2.Smash();
