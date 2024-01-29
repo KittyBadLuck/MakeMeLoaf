@@ -11,10 +11,13 @@ public class MiniGame3 : MonoBehaviour
     
     
     [Header("refs")]
-    public GameObject bakingIndicator;
+    //public GameObject bakingIndicator;
     public GameObject bakedPrefab;
     public List<Sprite> bakedSprites;
     public GameObject bakedDough;
+    public SpriteRenderer bakingIndicator;
+    public Sprite bakingSprite;
+    public Sprite finishedSprite;
     
     private bool finishedBaked;
     private float targetTime;
@@ -41,7 +44,7 @@ public class MiniGame3 : MonoBehaviour
     }
     void timerEnded()
     {
-        bakingIndicator.GetComponent<SpriteRenderer>().color = Color.yellow;
+        bakingIndicator.sprite = finishedSprite;
         bakedDough = GameObject.Instantiate(bakedPrefab);
         bakedDough.GetComponent<LiftedHandler>().isBaked = true;
         bakedDough.GetComponent<LiftedHandler>().isReadyToBake = false;
@@ -57,15 +60,15 @@ public class MiniGame3 : MonoBehaviour
 
     public void GetDough()
     {
-        bakingIndicator.SetActive(false);
+        bakingIndicator.gameObject.SetActive(false);
         bakedDough = null;
         canUse = true;
         finishedBaked = false;
     }
     public void Bake()
     {
-        bakingIndicator.SetActive(true);
-        bakingIndicator.GetComponent<SpriteRenderer>().color = Color.red;
+        bakingIndicator.gameObject.SetActive(true);
+        bakingIndicator.sprite = bakingSprite;
         isBaking = true;
         canUse = false;
         Debug.Log("Bake");
