@@ -19,6 +19,9 @@ public class Comptoir : MonoBehaviour
     private EventSystem _eventSystem;
     public bool isOpen;
 
+    public LiftedHandler breadCarried;
+    public PlayerController playerController;
+
     private void OnEnable()
     {
         _eventSystem = EventSystem.current;
@@ -64,9 +67,16 @@ public class Comptoir : MonoBehaviour
 
     public void GiveOrder(GameObject customer)
     {
-        _eventSystem.SetSelectedGameObject(selectedDefault);
-        hub.RemoveOrder();
-        customer.SetActive(false);
+        if(playerController.isLifting == true)
+        {
+
+
+
+            _eventSystem.SetSelectedGameObject(selectedDefault);
+            hub.RemoveOrder();
+            customer.SetActive(false);
+        }
+        
         
         
     }
