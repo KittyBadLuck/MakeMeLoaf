@@ -5,6 +5,7 @@ using UnityEngine;
 public class HUDCount : MonoBehaviour
 {
     private int currentCount = 0;
+    public int score;
     public GameObject[] orders;
 
     public void AddOrder()
