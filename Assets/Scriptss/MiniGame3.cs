@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
+using Image = UnityEngine.UI.Image;
 
 public class MiniGame3 : MonoBehaviour
 {
@@ -15,7 +17,7 @@ public class MiniGame3 : MonoBehaviour
     public GameObject bakedPrefab;
     public List<Sprite> bakedSprites;
     public GameObject bakedDough;
-    public SpriteRenderer bakingIndicator;
+    public Image bakingIndicator;
     public Sprite bakingSprite;
     public Sprite finishedSprite;
     
