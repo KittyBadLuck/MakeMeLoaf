@@ -67,14 +67,12 @@ public class Comptoir : MonoBehaviour
 
     public void GiveOrder(GameObject customer)
     {
-        if(playerController.isLifting == true)
+        if(playerController.isBaked == true)
         {
-
-
-
             _eventSystem.SetSelectedGameObject(selectedDefault);
             hub.RemoveOrder();
             customer.SetActive(false);
+            Destroy(playerController.liftedObject);
         }
         
         

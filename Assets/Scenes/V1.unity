@@ -1018,7 +1018,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &724820195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4186,9 +4186,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1734887698}
     m_Modifications:
+    - target: {fileID: 1380344558292279961, guid: 3be349c217cf87d4cb4186d372452f6f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7927987180897123012, guid: 3be349c217cf87d4cb4186d372452f6f, type: 3}
       propertyPath: m_Name
       value: Comptoir
+      objectReference: {fileID: 0}
+    - target: {fileID: 7927987180897123012, guid: 3be349c217cf87d4cb4186d372452f6f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7927987180897123013, guid: 3be349c217cf87d4cb4186d372452f6f, type: 3}
       propertyPath: m_RootOrder
@@ -4234,5 +4242,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7927987180897123014, guid: 3be349c217cf87d4cb4186d372452f6f, type: 3}
+      propertyPath: breadCarried
+      value: 
+      objectReference: {fileID: -5554784598391289141, guid: cceebf9a9711a2643b00bdb22dec877e, type: 3}
+    - target: {fileID: 7927987180897123014, guid: 3be349c217cf87d4cb4186d372452f6f, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 6225807811253667127, guid: 7c1958203d84fa84a838806145ef5726, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3be349c217cf87d4cb4186d372452f6f, type: 3}

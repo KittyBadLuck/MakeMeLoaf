@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -39,7 +40,8 @@ public class PlayerController : MonoBehaviour
     public GameObject liftedObject;
     public bool isLifted;
     public GameObject playerClimbed;
-    
+    public LiftedHandler liftedHandler;
+    public bool isBaked;
 
     private void Awake()
     {
@@ -162,6 +164,17 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
+        }
+        if (liftedHandler)
+        {
+            if(liftedHandler.isBaked == true)
+            {
+                isBaked = true;
+            }
+            else
+            {
+                isBaked = false;
+            }
         }
 
     }
@@ -290,8 +303,9 @@ public class PlayerController : MonoBehaviour
         dough.GetComponent<LiftedHandler>().isLifted = true;
         isLifting = true;
         liftedObject = dough;
+        liftedHandler = liftedObject.GetComponent<LiftedHandler>();
     }
-    
+ 
     GameObject GetClosestPlayer(List<GameObject> players)
     {
         GameObject pMin = null;
