@@ -38,14 +38,17 @@ public class PlayerController : MonoBehaviour
     public List<GameObject> climbablePlayer;
     public bool isLifting;
     public GameObject liftedObject;
+    public bool isBaked;
     public bool isLifted;
     public GameObject playerClimbed;
+    public LiftedHandler liftedHandler;
     
 
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+        
     }
 
     void FixedUpdate()
@@ -55,6 +58,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = playerClimbed.transform.position + new Vector3(0,yClimbOffset,0 );
         }
+
 
         if (isLifting)
         {
@@ -163,6 +167,15 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
+        }
+
+        if(liftedHandler.isBaked == true)
+        {
+            isBaked = true;
+        }
+        else
+        {
+            isBaked = false;
         }
 
     }
@@ -295,6 +308,7 @@ public class PlayerController : MonoBehaviour
         dough.GetComponent<LiftedHandler>().isLifted = true;
         isLifting = true;
         liftedObject = dough;
+        liftedHandler = liftedObject.GetComponent<LiftedHandler>();
     }
     
     GameObject GetClosestPlayer(List<GameObject> players)
