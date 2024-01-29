@@ -41,6 +41,7 @@ public class Comptoir : MonoBehaviour
     {
         print("close");
         isOpen = false;
+        playerController.GetComponentInParent<PlayerInputHandler>().onCounter = false;
         canvas.SetActive(false);
 
     }
@@ -62,21 +63,28 @@ public class Comptoir : MonoBehaviour
             OrderingCustomer.SetActive(false);
             hub.AddOrder();
         }
+        _eventSystem.SetSelectedGameObject(selectedDefault);
 
     }
 
     public void GiveOrder(GameObject customer)
     {
-        if(playerController.isBaked == true)
+        GameObject liftedObject = playerController.liftedObject;
+        if (liftedObject.CompareTag("Player"))
+        {
+            liftedObject = liftedObject.GetComponent<PlayerController>().liftedObject;
+        }
+        if(liftedObject.GetComponent<LiftedHandler>().isBaked == true)
         {
             _eventSystem.SetSelectedGameObject(selectedDefault);
             hub.RemoveOrder();
             customer.SetActive(false);
+            playerController.liftedObject = null;
+            playerController.isLifting = false;
             Destroy(playerController.liftedObject);
         }
         
-        
-        
+
     }
     
 }

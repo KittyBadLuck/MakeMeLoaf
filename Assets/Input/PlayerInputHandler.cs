@@ -22,6 +22,8 @@ public class PlayerInputHandler : MonoBehaviour
     public Canvas Mini2Prefab;
     public bool playing2;
     public MiniGame3 miniGame3;
+
+    public bool onCounter;
     
     [Header("Comptoire")]
     public Comptoir comptoir;
@@ -43,7 +45,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (!playing1 && !playing2)
+        if (!playing1 && !playing2 && !onCounter)
         {
             _playerController.OnMove(context);
         }
@@ -54,7 +56,7 @@ public class PlayerInputHandler : MonoBehaviour
         bool acted = false;
         if (context.performed)
         {
-            if (!playing1 && !playing2 && !_playerController.inCounterZone)
+            if (!playing1 && !playing2 && !onCounter && !_playerController.inCounterZone)
             {
                 if (!_playerController.isLifting)
                 {
@@ -131,7 +133,9 @@ public class PlayerInputHandler : MonoBehaviour
         {
             if (_playerController.isNearCounter && !comptoir.isOpen)
             {
+                onCounter = true;
                 comptoir.Open();
+                comptoir.playerController = _playerController;
             }
 
             if (_playerController.isNearDisguise)
