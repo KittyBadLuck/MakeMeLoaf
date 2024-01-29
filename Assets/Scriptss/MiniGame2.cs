@@ -75,6 +75,7 @@ public class MiniGame2 : MonoBehaviour
     void SpawnDough()
     {
         isGameDone = false;
+        canUse = false;
         targetTime = 2f;
         slapNumber = 0;
         peets.localScale = new Vector3(0.5f, 0.5f, 0.5f);

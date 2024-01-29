@@ -75,7 +75,6 @@ public class PlayerInputHandler : MonoBehaviour
                         {
                             _playerController.Lift(miniGame2.doughWorld);
                             miniGame2.doughWorld = null;
-                            miniGame2.canUse = true;
                             acted = true;
                         }
                     }
@@ -172,7 +171,7 @@ public class PlayerInputHandler : MonoBehaviour
                     miniGame2.player = this;
                     Mini2Prefab.worldCamera = this.gameObject.GetComponent<PlayerInput>().camera;
                     playing2 = true;
-                    miniGame2.canUse = true;
+                    miniGame2.canUse = false;
                 }
               
             }
